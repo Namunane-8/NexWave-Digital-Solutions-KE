@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# Sitemap will be published with the complete page routes.
