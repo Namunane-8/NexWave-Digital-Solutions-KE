@@ -195,3 +195,74 @@ h1 em, h2 em { color: var(--green); font-weight: 500; font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Page-level layouts shared by all secondary routes */
+.page-hero { padding-block: clamp(65px, 8vw, 100px) 56px; border-bottom: 1px solid var(--line); }
+.page-hero h1 { max-width: 900px; margin-bottom: 24px; font-size: clamp(43px, 5.4vw, 68px); }
+.page-intro { max-width: 720px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.85; }
+.page-body { padding-block: clamp(55px, 7vw, 90px) var(--space-section); }
+.service-detail-list { border-top: 1px solid var(--line); }
+.service-detail { display: grid; grid-template-columns: 50px minmax(0, 1fr); gap: 28px; padding: 32px 0; border-bottom: 1px solid var(--line); }
+.service-detail > .service-number { padding-top: 7px; }
+.service-detail h2, .principles-grid h2, .founder-panel h2, .page-cta h2, .contact-details h2, .privacy-copy h2, .story-steps h2 { margin-bottom: 12px; font-family: Manrope, sans-serif; font-size: clamp(21px, 2.4vw, 29px); letter-spacing: -.045em; font-weight: 600; }
+.service-detail p, .principles-grid p, .founder-panel p, .page-cta p, .privacy-copy p, .story-steps p { color: var(--muted); font-size: 13px; line-height: 1.85; }
+.service-detail .detail-scope { max-width: 760px; margin-bottom: 0; color: #748078; font-size: 12px; }
+.page-cta { margin-top: 65px; padding: clamp(28px, 5vw, 54px); background: var(--soft); border-left: 3px solid var(--green); }
+.page-cta h2 { font-size: clamp(27px, 3vw, 36px); }
+.page-cta p { max-width: 610px; margin-bottom: 23px; }
+.principles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.principles-grid article { padding: 28px 24px 30px 0; }
+.principles-grid article + article { padding-left: 24px; border-left: 1px solid var(--line); }
+.principles-grid article > span, .story-steps article > span { display: block; margin-bottom: 25px; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+.principles-grid h2 { font-size: 21px; }
+.principles-grid p { margin-bottom: 0; }
+.founder-panel { margin-top: 70px; padding-top: 36px; display: grid; grid-template-columns: .7fr 1fr; gap: 45px; border-top: 1px solid var(--line); }
+.founder-panel h2 { font-size: clamp(24px, 3vw, 34px); }
+.founder-panel p { margin-bottom: 20px; }
+.story-prose > p { max-width: 780px; color: var(--muted); font-size: 16px; line-height: 1.95; }
+.story-steps { margin-top: 58px; border-top: 1px solid var(--line); }
+.story-steps article { display: grid; grid-template-columns: .55fr 1fr 1fr; align-items: start; gap: 28px; padding: 27px 0; border-bottom: 1px solid var(--line); }
+.story-steps article > span { margin: 8px 0 0; }
+.story-steps h2 { font-size: 22px; }
+.story-steps p { margin: 0; }
+.contact-page-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(240px, .7fr); gap: clamp(36px, 7vw, 90px); align-items: start; }
+.contact-form { display: flex; flex-direction: column; align-items: stretch; }
+.form-notice { padding: 14px 16px; margin-bottom: 23px; color: #4c5b51; background: var(--soft); border-left: 3px solid #a3b77e; font-size: 12px; line-height: 1.7; }
+.contact-form label { margin: 18px 0 8px; font-size: 12px; font-weight: 700; }
+.contact-form input, .contact-form select, .contact-form textarea { width: 100%; min-height: 48px; padding: 12px 13px; border: 1px solid #bdc9bf; border-radius: 0; color: var(--ink); background: white; font: inherit; font-size: 16px; }
+.contact-form textarea { min-height: 150px; resize: vertical; line-height: 1.6; }
+.contact-form input:focus-visible, .contact-form select:focus-visible, .contact-form textarea:focus-visible { outline: 3px solid #8da96c; outline-offset: 2px; border-color: var(--green); }
+.contact-form button { align-self: flex-start; margin-top: 23px; border: 0; cursor: pointer; }
+.form-feedback { margin: 16px 0 0; color: var(--green); font-size: 12px; line-height: 1.7; }
+.contact-details { padding: 28px; background: var(--soft); }
+.contact-details h2 { font-size: 23px; }
+.contact-details > p { color: var(--muted); font-size: 13px; line-height: 1.75; }
+.contact-details > a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); color: var(--green); font-size: 12px; font-weight: 700; text-decoration: none; overflow-wrap: anywhere; }
+.contact-details .privacy-hint { margin: 24px 0 0; font-size: 11px; }
+.privacy-hint a, .privacy-copy a { color: var(--green); text-underline-offset: 3px; }
+.privacy-copy { max-width: 850px; }
+.privacy-copy h2 { margin-top: 34px; font-size: 22px; }
+.privacy-copy h2:first-child { margin-top: 0; }
+.privacy-copy p { font-size: 14px; }
+.not-found { min-height: 56vh; padding-block: 100px; }
+.not-found h1 { font-size: clamp(48px, 6vw, 74px); }
+.not-found > p:not(.eyebrow) { max-width: 570px; margin-bottom: 30px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+.footer-links { width: min(100%, var(--content)); margin: 0 auto; padding: 0 0 28px; display: flex; flex-wrap: wrap; gap: 24px; }
+.footer-links a { color: #56645b; font-size: 11px; font-weight: 600; text-decoration: none; }
+.footer-links a:hover { color: var(--green); }
+@media (max-width: 680px) {
+  .page-hero { padding-block: 55px 38px; }
+  .page-hero h1 { font-size: clamp(40px, 10vw, 55px); }
+  .page-intro { font-size: 14px; }
+  .service-detail { grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding-block: 25px; }
+  .principles-grid { grid-template-columns: 1fr; }
+  .principles-grid article, .principles-grid article + article { padding: 24px 0; border-left: 0; }
+  .principles-grid article + article { border-top: 1px solid var(--line); }
+  .principles-grid article > span { margin-bottom: 15px; }
+  .founder-panel { grid-template-columns: 1fr; gap: 8px; margin-top: 48px; }
+  .story-steps article { grid-template-columns: 1fr; gap: 8px; }
+  .story-steps article > span { margin: 0 0 8px; }
+  .contact-page-grid { grid-template-columns: 1fr; }
+  .contact-details { padding: 24px; }
+  .footer-links { gap: 17px; }
+}
