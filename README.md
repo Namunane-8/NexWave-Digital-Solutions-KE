@@ -61,4 +61,4 @@ The initial foundation uses the established NexWave deep green (`#174b3b`), char
 
 ## Build verification checkpoint
 
-The verification branch is intended to exercise the repository CI workflow without changing application behavior or the production deployment.
+The live site clock uses the visitor's local timezone and displays the full weekday, day, month, year, and 12-hour time. Its formatting is covered by the smoke tests.
