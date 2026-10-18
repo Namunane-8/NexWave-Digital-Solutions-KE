@@ -5,6 +5,7 @@ const navItems = [
   { label: 'Services', href: '/services' },
   { label: 'Our story', href: '/our-story' },
   { label: 'About', href: '/about' },
+  { label: 'Store', href: '/store' },
 ];
 
 const pageMeta: Record<string, { title: string; description: string }> = {
@@ -15,6 +16,7 @@ const pageMeta: Record<string, { title: string; description: string }> = {
   '/contact': { title: 'Contact NexWave Digital Solutions', description: 'Tell NexWave Digital Solutions about your digital project, business challenge or enquiry.' },
   '/privacy': { title: 'Privacy Notice | NexWave Digital Solutions', description: 'Read how NexWave Digital Solutions approaches information shared through its website.' },
   '/404': { title: 'Page not found | NexWave Digital Solutions', description: 'The requested page could not be found. Return to NexWave Digital Solutions.' },
+  '/store': { title: 'Digital Products Store | NexWave Digital Solutions', description: 'Browse NexWave Digital Solutions digital products and complete purchases securely through the official Selar storefront.' },
 };
 
 function LocalClock() {
@@ -96,7 +98,7 @@ function Footer() {
         <a className="footer-founder" href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Meet the founder <Arrow diagonal /></a>
       </div>
       <div className="footer-links" aria-label="Footer navigation">
-        <a href="/services">Services</a><a href="/our-story">Our story</a><a href="/about">About</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a>
+        <a href="/services">Services</a><a href="/our-story">Our story</a><a href="/about">About</a><a href="/store">Store</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} NexWave Digital Solutions</span>
@@ -202,6 +204,22 @@ function PrivacyPage() {
   </PageLayout>;
 }
 
+
+function StorePage() {
+  return <PageLayout eyebrow="NEXWAVE / DIGITAL STORE" title={<>Digital tools for<br /><em>your next step.</em></>} intro="Explore digital resources from NexWave Digital Solutions. Product availability, full descriptions, current pricing and delivery details are maintained on our Selar storefront.">
+    <section className="store-panel" aria-labelledby="store-heading">
+      <div className="store-panel-copy">
+        <p className="eyebrow">SECURE CHECKOUT BY SELAR</p>
+        <h2 id="store-heading">Browse the current catalogue.</h2>
+        <p>Choose a resource from the official store to review its details and current price. Purchases and digital delivery are handled by Selar; NexWave does not collect payment-card details on this website.</p>
+        <a className="button button-primary" href="https://selar.com/m/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Visit NexWave on Selar <Arrow diagonal /></a>
+        <p className="store-note">You’ll continue to Selar to review product information and complete any purchase. Prices, availability and payment methods shown there are authoritative.</p>
+      </div>
+      <div className="store-panel-aside" aria-hidden="true"><span className="store-index">NW / STORE</span><div className="store-orbit"><span /><span /><span /></div><p>LEARN · CREATE · GROW</p></div>
+    </section>
+  </PageLayout>;
+}
+
 function NotFoundPage() {
   return <section className="not-found section-wrap"><p className="eyebrow">ERROR / 404</p><h1>This page could<br /><em>not be found.</em></h1><p>The address may have changed or the link may be incorrect. Return to the homepage or browse the services available on this site.</p><div className="hero-actions"><a className="button button-primary" href="/">Return home <Arrow /></a><a className="text-link" href="/services">Browse services <Arrow /></a></div></section>;
 }
@@ -237,7 +255,7 @@ function App() {
     if (canonical) canonical.href = `https://nexwavedigitalsolutions.co.ke${route === '/' ? '/' : route}`;
   }, [route]);
 
-  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : route === '/store' ? <StorePage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
 }
 
 export default App;
