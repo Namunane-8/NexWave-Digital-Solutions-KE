@@ -85,3 +85,8 @@ test('mobile typography and narrow viewport breakpoints are present', () => {
   assert.match(css, /font-size: 16px/);
   assert.match(css, /font-size: 18px/);
 });
+
+test('founder page content avoids the removed surname', () => {
+  const removedName = ['Wafu', 'la'].join('');
+  assert.equal(app.toLowerCase().includes(removedName.toLowerCase()), false);
+});
