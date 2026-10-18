@@ -161,7 +161,7 @@ function ServicesPage() {
 function AboutPage() {
   return <PageLayout eyebrow="ABOUT NEXWAVE" title={<>Useful technology<br /><em>starts with a real need.</em></>} intro="NexWave Digital Solutions is a founder-led digital business based in Kenya. We work across websites, online selling journeys, digital workflows and practical digital learning, with a focus on clear scope and useful outcomes.">
     <div className="principles-grid"><article><span>01</span><h2>Understand first</h2><p>We begin with the challenge, the people affected and the outcome that would make a difference.</p></article><article><span>02</span><h2>Agree the work</h2><p>Scope, timing, responsibilities and costs should be clear before implementation begins.</p></article><article><span>03</span><h2>Build with care</h2><p>We value clarity, accessibility, maintainability and honest communication about limitations.</p></article></div>
-    <div className="founder-panel"><div><p className="eyebrow">FOUNDER</p><h2>Namunane Emmanuel Wafula</h2></div><div><p>NexWave was founded by Namunane Emmanuel Wafula, whose work spans digital products, websites, practical AI learning and digital skills initiatives.</p><a className="text-link" href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Visit the founder’s website <Arrow diagonal /></a></div></div>
+    <div className="founder-panel"><div><p className="eyebrow">FOUNDER</p><h2>Namunane Emmanuel</h2></div><div><p>NexWave was founded to build useful digital products, websites, practical AI learning and digital skills initiatives.</p><a className="text-link" href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Visit the founder’s website <Arrow diagonal /></a></div></div>
   </PageLayout>;
 }
 
