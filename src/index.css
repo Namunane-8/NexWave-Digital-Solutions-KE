@@ -426,3 +426,127 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   .back-to-top { transition: none !important; transform: none; }
 }
+
+
+/* Readability and responsive refinement */
+:root { --gutter: clamp(16px, 4.5vw, 64px); }
+body { font-size: 18px; line-height: 1.7; }
+p { line-height: 1.75; }
+.utility-bar { font-size: 13px; letter-spacing: .025em; }
+.primary-nav > a { font-size: 16px; }
+.wordmark-text { font-size: 17px; }
+.wordmark-text span { font-size: 10px; }
+.eyebrow { font-size: 13px; letter-spacing: .11em; }
+.section-heading > p, .service-row p, .scope-note, .page-intro, .service-detail p,
+.principles-grid p, .founder-panel p, .story-prose p, .privacy-copy p,
+.contact-details > p, .store-note { font-size: 16px; }
+.button, .text-link, .contact-form label, .contact-form input,
+.contact-form select, .contact-form textarea, .contact-form button { font-size: 16px; }
+.contact-form input, .contact-form select { min-height: 48px; }
+.contact-form textarea { min-height: 140px; }
+.appearance-control label { font-size: 14px; }
+.appearance-control select { min-height: 44px; font-size: 16px; }
+.store-panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(240px, .8fr); gap: clamp(24px, 5vw, 72px); padding: clamp(24px, 5vw, 64px); border: 1px solid var(--line); background: var(--soft); }
+.store-panel-copy { min-width: 0; }
+.store-panel h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; }
+.store-panel-copy > p:not(.eyebrow) { max-width: 62ch; }
+.store-note { margin: 20px 0 0; color: var(--muted); }
+.store-panel-aside { min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 18px; color: var(--green); background: var(--paper); border: 1px solid var(--line); }
+.store-index, .store-panel-aside > p { font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.store-orbit { width: min(100%, 220px); aspect-ratio: 1; position: relative; display: grid; place-items: center; }
+.store-orbit::before, .store-orbit::after { content: ""; position: absolute; inset: 12%; border: 1px solid var(--green); border-radius: 50%; }
+.store-orbit::after { inset: 27%; border-style: dashed; }
+.store-orbit span { position: absolute; width: 13px; height: 13px; border-radius: 50%; background: var(--green); }
+.store-orbit span:nth-child(1) { top: 13%; left: 48%; }
+.store-orbit span:nth-child(2) { right: 13%; bottom: 25%; }
+.store-orbit span:nth-child(3) { left: 12%; bottom: 28%; }
+:root[data-theme="dark"] .store-panel { background: var(--soft); }
+:root[data-theme="dark"] .store-panel-aside { background: #101914; }
+:root[data-theme="dark"] .store-panel-aside, :root[data-theme="dark"] .store-orbit { color: #9ed7bd; }
+:root[data-theme="dark"] .store-orbit::before, :root[data-theme="dark"] .store-orbit::after { border-color: #9ed7bd; }
+:root[data-theme="dark"] .store-orbit span { background: #9ed7bd; }
+@media (max-width: 900px) {
+  .site-header { gap: 16px; }
+  .primary-nav { gap: 14px; }
+  .primary-nav > a { font-size: 15px; }
+  .appearance-control { gap: 6px; }
+  .appearance-control select { max-width: 118px; }
+  .hero { gap: 28px; }
+  .store-panel { grid-template-columns: minmax(0, 1fr) minmax(180px, .7fr); }
+}
+@media (max-width: 680px) {
+  :root { --gutter: 18px; --space-section: 68px; }
+  body { font-size: 16px; }
+  .utility-bar { align-items: flex-start; flex-direction: column; gap: 4px; padding-block: 9px; font-size: 12px; }
+  .local-clock { font-size: 12px; letter-spacing: 0; }
+  .site-header { min-height: 76px; padding-inline: var(--gutter); gap: 12px; }
+  .wordmark { gap: 9px; }
+  .brand-mark { width: 28px; height: 28px; }
+  .brand-mark span { width: 11px; height: 11px; }
+  .wordmark-text { font-size: 15px; }
+  .wordmark-text span { font-size: 9px; }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-width: 76px; min-height: 44px; padding: 8px 10px; font-size: 15px; border: 1px solid var(--line); color: var(--ink); background: var(--paper); }
+  .primary-nav { position: absolute; z-index: 12; top: 112px; left: 0; right: 0; display: none; flex-direction: column; align-items: stretch; gap: 0; padding: 10px var(--gutter) 18px; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 12px 18px rgb(0 0 0 / 8%); }
+  .primary-nav.is-open { display: flex; }
+  .primary-nav > a { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .primary-nav .nav-contact { justify-content: center; margin-top: 12px; padding: 13px; }
+  .appearance-control { min-height: 52px; }
+  .appearance-control select { max-width: none; min-width: 130px; }
+  .hero { min-height: auto; padding-block: 54px 58px; grid-template-columns: minmax(0,1fr); gap: 32px; }
+  h1 { font-size: clamp(38px, 10vw, 52px); line-height: 1.08; letter-spacing: -.05em; overflow-wrap: anywhere; }
+  h2 { letter-spacing: -.045em; }
+  .hero-intro, .page-intro { font-size: 17px; line-height: 1.65; }
+  .hero-visual { min-height: 300px; }
+  .hero-actions { flex-wrap: wrap; gap: 16px; }
+  .button { min-height: 48px; padding: 13px 16px; }
+  .text-link { min-height: 44px; display: inline-flex; align-items: center; }
+  .strip-inner { flex-wrap: wrap; gap: 10px 16px; padding-block: 18px; }
+  .strip-inner p { width: 100%; margin: 0; font-size: 15px; }
+  .section-heading { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .section-heading h2, .story-content h2, .contact-inner h2 { font-size: clamp(30px, 8vw, 42px); }
+  .service-row { grid-template-columns: 28px minmax(0,1fr) 18px; gap: 12px; padding-block: 22px; }
+  .service-row > div { min-width: 0; }
+  .service-row h3 { font-size: 17px; overflow-wrap: anywhere; }
+  .service-row p { font-size: 15px; }
+  .service-audience { display: none; }
+  .story-layout { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  .story-index { display: none; }
+  .about { grid-template-columns: minmax(0,1fr); gap: 20px; padding-block: 58px; }
+  .contact-inner { grid-template-columns: minmax(0,1fr); gap: 24px; padding-block: 52px; }
+  .page-hero { padding-top: 54px; }
+  .page-hero h1 { font-size: clamp(36px, 9vw, 50px); }
+  .page-body { padding-bottom: 64px; }
+  .service-detail { grid-template-columns: 28px minmax(0,1fr); gap: 16px; }
+  .service-detail h2 { font-size: 22px; overflow-wrap: anywhere; }
+  .principles-grid { grid-template-columns: minmax(0,1fr); }
+  .founder-panel { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .contact-page-grid { grid-template-columns: minmax(0,1fr); gap: 26px; }
+  .contact-form, .contact-details { min-width: 0; }
+  .contact-form input, .contact-form select, .contact-form textarea { width: 100%; min-width: 0; }
+  .contact-details > a { overflow-wrap: anywhere; }
+  .privacy-copy { max-width: 100%; }
+  .privacy-copy h2 { font-size: 22px; }
+  .story-steps { grid-template-columns: minmax(0,1fr); }
+  .page-cta { padding: 24px; }
+  .store-panel { grid-template-columns: minmax(0,1fr); padding: 22px; gap: 22px; }
+  .store-panel-aside { min-height: 220px; }
+  .footer-main { align-items: flex-start; }
+  .footer-links { flex-wrap: wrap; gap: 10px 18px; }
+  .footer-bottom { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+  .back-to-top { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); }
+}
+@media (max-width: 360px) {
+  :root { --gutter: 14px; }
+  .wordmark-text { font-size: 13px; }
+  .wordmark-text span { font-size: 8px; letter-spacing: .12em; }
+  .menu-toggle { min-width: 68px; gap: 6px; padding-inline: 7px; }
+  .hero-visual { min-height: 260px; }
+  .hero-actions { align-items: flex-start; flex-direction: column; }
+  .service-row { gap: 8px; }
+  .store-panel { padding: 16px; }
+  .back-to-top { right: 10px; bottom: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
