@@ -32,6 +32,31 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <span className="arrow" aria-hidden="true">{diagonal ? '↗' : '→'}</span>;
 }
 
+function AppearanceControl() {
+  const [preference, setPreference] = useState<'light' | 'dark' | 'system'>(() => {
+    try {
+      const saved = window.localStorage.getItem('nexwave-appearance');
+      return saved === 'light' || saved === 'dark' || saved === 'system' ? saved : 'system';
+    } catch { return 'system'; }
+  });
+  useEffect(() => {
+    const root = document.documentElement;
+    const apply = () => {
+      const dark = preference === 'dark' || (preference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      root.dataset.theme = dark ? 'dark' : 'light';
+      root.style.colorScheme = dark ? 'dark' : 'light';
+    };
+    apply();
+    try { window.localStorage.setItem('nexwave-appearance', preference); } catch { /* storage may be unavailable */ }
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    if (preference === 'system') {
+      media.addEventListener('change', apply);
+      return () => media.removeEventListener('change', apply);
+    }
+  }, [preference]);
+  return <div className="appearance-control"><label htmlFor="appearance-choice">Appearance</label><select id="appearance-choice" value={preference} onChange={(event) => setPreference(event.target.value as 'light' | 'dark' | 'system')}><option value="light">Light</option><option value="dark">Dark</option><option value="system">System</option></select></div>;
+}
+
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
@@ -53,7 +78,7 @@ function Header() {
       <nav id="primary-navigation" className={`primary-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Primary navigation">
         {navItems.map((item) => <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>)}
         <a href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Founder <Arrow diagonal /></a>
-        <a className="nav-contact" href="/contact" onClick={() => setMenuOpen(false)}>Start a conversation <Arrow /></a>
+        <AppearanceControl /><a className="nav-contact" href="/contact" onClick={() => setMenuOpen(false)}>Start a conversation <Arrow /></a>
       </nav>
     </header>
   );
