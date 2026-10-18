@@ -1,6 +1,6 @@
 # NexWave design system — foundation
 
-This is the initial implementation baseline. Confirm the original approved logo and brand assets before final publication; no unverified logo asset is being represented as official.
+This design-system record describes the accessibility and appearance upgrade branch. The approved logo reference was supplied as a 92×92 raster image; it is not yet integrated because a crisp production-ready asset and repository binary upload are still needed. Do not treat the existing geometric wordmark placeholder as the official logo.
 
 ## Colour tokens
 
@@ -38,3 +38,32 @@ This is the initial implementation baseline. Confirm the original approved logo 
 - Motion reduced when the visitor requests reduced motion.
 - Mobile layout targets a 320px minimum width and should be tested at 390px.
 - Contrast and assistive-technology checks remain part of milestone QA; this document is not a claim of certified WCAG conformance.
+
+
+## Appearance modes
+
+- The appearance selector offers Light, Dark and System.
+- Explicit selection is stored in local storage under `nexwave-appearance`; storage errors are handled without breaking the page.
+- A small early head script applies the stored/system preference before React mounts to reduce theme flash.
+- System mode listens for operating-system appearance changes while active.
+- Theme styles are implemented using root-level CSS tokens and dark-mode component overrides. Contrast must still be measured for every interactive state before claiming WCAG 2.2 AA conformance.
+
+## Motion
+
+- Existing transitions are brief and decorative.
+- The reduced-motion media query disables transitions and animations and prevents smooth scrolling.
+- Content does not depend on animation to convey meaning.
+
+## Image and licence register
+
+| Asset | Source / rights evidence | Licence / attribution | Status |
+| --- | --- | --- | --- |
+| Homepage geometric CSS illustration | Authored in project CSS; no external image file | No external licence or attribution required | Existing decorative illustration, not client-work evidence |
+| NexWave logo reference | User-supplied upload in conversation, 92×92 PNG | Supplied by site owner; confirm original ownership/approved-use scope before publication | Not yet integrated; request high-resolution SVG or transparent PNG |
+| External stock / service photography | None added in this milestone branch | Not applicable | No external image licence has been assumed |
+
+## QA status
+
+- Automated typecheck, tests and build: pending after these changes.
+- Real browser route/theme/keyboard/zoom/mobile/contrast checks: pending because an authorized preview deployment is not available.
+- WCAG 2.2 AA conformance is not claimed until measured contrast and interaction tests are complete.
