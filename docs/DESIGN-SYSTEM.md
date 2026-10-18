@@ -67,3 +67,26 @@ This design-system record describes the accessibility and appearance upgrade bra
 - Automated typecheck, tests and build: pending after these changes.
 - Real browser route/theme/keyboard/zoom/mobile/contrast checks: pending because an authorized preview deployment is not available.
 - WCAG 2.2 AA conformance is not claimed until measured contrast and interaction tests are complete.
+
+
+## Selar store handoff
+
+- Added the `/store` route and main/footer navigation entry.
+- The page links to the known storefront URL: `https://selar.com/m/nexwave-digital-solutions1952019`.
+- Individual product cards, titles, covers, prices and direct product URLs are intentionally not fabricated. The store page directs visitors to Selar for current catalogue details and checkout.
+- No payment-card information is collected by NexWave; Selar handles its own checkout and delivery.
+- No product image has been copied from Selar into this repository, so no external image licence is assumed. Verify product data and image-use rights before adding locally rendered product cards.
+
+## Responsive refinements
+
+- Body copy targets 18px desktop and 16–17px on mobile; key navigation and form controls are enlarged.
+- Additional breakpoints are defined around 900px, 680px and 360px, with a single-column mobile layout for the store and major content grids.
+- CSS illustration remains decorative and is not evidence of client work.
+- Source-level checks cover route metadata, store handoff, mobile breakpoints and reduced motion. They do not replace browser QA at 320, 360, 390, 430, tablet, desktop or 200% zoom.
+
+## Current verification state
+
+- Previous commit `f99c30e20e2b1f33b727b2a46b359280feea1039` passed GitHub Actions run #24.
+- Combined upgrade requires a fresh passing run on its final commit.
+- Real-browser QA remains pending until an authorized preview deployment is available.
+- No production domain, DNS, old repository or production deployment has been changed.
