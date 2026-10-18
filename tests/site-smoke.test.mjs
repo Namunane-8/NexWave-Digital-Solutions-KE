@@ -8,7 +8,7 @@ const sitemap = readFileSync(new URL('../public/sitemap.xml', import.meta.url), 
 const robots = readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
 
 test('public page routes and titles are defined', () => {
-  for (const route of ['/', '/services', '/about', '/our-story', '/contact', '/privacy', '/404']) {
+  for (const route of ['/', '/services', '/about', '/our-story', '/contact', '/privacy', '/store', '/404']) {
     assert.ok(app.includes(`'${route}'`), `missing route metadata for ${route}`);
   }
 });
@@ -68,4 +68,20 @@ test('theme, focus, responsive and reduced-motion styles are defined', () => {
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /width: 48px/);
+});
+
+test('store page hands off purchases to the known official Selar storefront', () => {
+  assert.match(app, /function StorePage\(\)/);
+  assert.match(app, /href="https:\/\/selar\.com\/m\/nexwave-digital-solutions1952019"/);
+  assert.match(app, /payment-card details on this website/);
+  assert.match(app, /route === '\/store' \? <StorePage \/>/);
+});
+
+test('mobile typography and narrow viewport breakpoints are present', () => {
+  const css = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(css, /@media \(max-width: 360px\)/);
+  assert.match(css, /@media \(max-width: 680px\)/);
+  assert.match(css, /@media \(max-width: 900px\)/);
+  assert.match(css, /font-size: 16px/);
+  assert.match(css, /font-size: 18px/);
 });
