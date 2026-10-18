@@ -51,7 +51,7 @@ test('appearance selector supports Light, Dark and System with persistence', () 
   assert.match(app, /value="dark">Dark/);
   assert.match(app, /value="system">System/);
   assert.match(app, /prefers-color-scheme: dark/);
-  assert.match(app, /aria-label="Appearance"/);
+  assert.match(app, /htmlFor="appearance-choice"/);
 });
 
 test('back-to-top is labelled, scroll-aware and respects reduced motion', () => {
@@ -67,5 +67,5 @@ test('theme, focus, responsive and reduced-motion styles are defined', () => {
   assert.match(css, /\.back-to-top:focus-visible/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
-  assert.match(css, /min-height: 48px/);
+  assert.match(css, /width: 48px/);
 });
