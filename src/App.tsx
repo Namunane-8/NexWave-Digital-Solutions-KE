@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { FormEvent, ReactNode } from 'react';
 
 const navItems = [
   { label: 'Services', href: '/services' },
@@ -180,7 +181,7 @@ function NotFoundPage() {
   return <section className="not-found section-wrap"><p className="eyebrow">ERROR / 404</p><h1>This page could<br /><em>not be found.</em></h1><p>The address may have changed or the link may be incorrect. Return to the homepage or browse the services available on this site.</p><div className="hero-actions"><a className="button button-primary" href="/">Return home <Arrow /></a><a className="text-link" href="/services">Browse services <Arrow /></a></div></section>;
 }
 
-function PageLayout({ eyebrow, title, intro, children }: { eyebrow: string; title: React.ReactNode; intro: string; children: React.ReactNode }) {
+function PageLayout({ eyebrow, title, intro, children }: { eyebrow: string; title: ReactNode; intro: string; children: ReactNode }) {
   return <><section className="page-hero section-wrap"><p className="eyebrow"><span className="eyebrow-line" /> {eyebrow}</p><h1>{title}</h1><p className="page-intro">{intro}</p></section><section className="page-body section-wrap">{children}</section></>;
 }
 
