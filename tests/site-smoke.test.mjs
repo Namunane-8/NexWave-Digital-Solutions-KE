@@ -44,3 +44,28 @@ test('SEO entry metadata and sitemap are present', () => {
 test('the retired AI Build Lab is not presented in public page content', () => {
   assert.doesNotMatch(app, /AI Build Lab|six speculative AI concepts/i);
 });
+
+test('appearance selector supports Light, Dark and System with persistence', () => {
+  assert.match(app, /nexwave-appearance/);
+  assert.match(app, /value="light">Light/);
+  assert.match(app, /value="dark">Dark/);
+  assert.match(app, /value="system">System/);
+  assert.match(app, /prefers-color-scheme: dark/);
+  assert.match(app, /aria-label="Appearance"/);
+});
+
+test('back-to-top is labelled, scroll-aware and respects reduced motion', () => {
+  assert.match(app, /aria-label="Back to top"/);
+  assert.match(app, /window\.scrollY > 360/);
+  assert.match(app, /window\.scrollTo\(\{ top: 0, behavior: reduceMotion \? 'auto' : 'smooth' \}\)/);
+  assert.match(app, /prefers-reduced-motion: reduce/);
+});
+
+test('theme, focus, responsive and reduced-motion styles are defined', () => {
+  const css = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(css, /:root\[data-theme="dark"\]/);
+  assert.match(css, /\.back-to-top:focus-visible/);
+  assert.match(css, /@media \(max-width: 680px\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /min-height: 48px/);
+});
