@@ -1,6 +1,6 @@
 # NexWave Digital Solutions
 
-A React + TypeScript website for NexWave Digital Solutions, built with Vite.
+A responsive React + TypeScript website for NexWave Digital Solutions, built with Vite.
 
 ## Requirements
 
@@ -20,28 +20,41 @@ Vite prints the local development URL in the terminal.
 
 ```bash
 npm run typecheck
+npm test
 npm run build
 npm run preview
 ```
 
-The production build is generated in `dist/`.
+The production build is generated in `dist/`. GitHub Actions runs type-checking, source smoke tests and the production build on pushes to `main` and pull requests.
 
-## Environment variables
+## Pages
 
-The initial homepage does not require secrets or external API keys. Enquiry actions currently open email or WhatsApp. A server-backed contact form and automated delivery will only be enabled after an approved provider is configured and its delivery is tested. Never put private credentials in client-side variables or commit them to Git.
+- Home: `/`
+- Services: `/services`
+- About: `/about`
+- Our Developing Story: `/our-story`
+- Contact: `/contact`
+- Privacy: `/privacy`
+- Branded not-found view for unknown routes
+
+## Contact delivery
+
+The contact form validates required fields in the browser and prepares a message in the visitor's configured email application. **Automated server-side delivery is not configured or tested yet.** The page explains this limitation. Direct email and WhatsApp links are available as alternatives.
+
+For real automated delivery, choose and authorize an email provider, configure its API key only as a server-side environment variable, implement server-side validation and abuse protection, and test a real preview submission end-to-end. Do not expose private credentials in client-side variables or commit them to Git.
 
 ## Deployment
 
-This project is compatible with Vite static hosting. Connect this repository to a separate preview project before considering production. The existing official domain and production deployment must not be changed without explicit owner approval.
+The project includes a Vercel SPA route fallback. Connect this repository to a separate preview project before considering production. The existing official domain and production deployment must not be changed without explicit owner approval.
 
-## Design system
+## Design system and brand assets
 
-The initial foundation uses the established NexWave deep green (`#174b3b`), charcoal (`#202a26`), white, soft neutral surfaces and restrained pale-lime accents. Original brand assets must be verified before replacing any approved mark. The homepage's geometric hero composition is CSS artwork and is not presented as a client project or photograph.
+The initial foundation uses the established NexWave deep green (`#174b3b`), charcoal (`#202a26`), white, soft neutral surfaces and restrained pale-lime accents. The design tokens and interface principles are documented in `docs/DESIGN-SYSTEM.md`. Original approved brand assets still need to be verified before final publication; the homepage's geometric hero composition is CSS artwork and is not presented as a client project or photograph.
 
 ## Release safeguards
 
 - Keep secrets in hosting environment variables, never in source control.
-- Run type checks and the production build before release.
-- Test mobile navigation and keyboard focus.
+- Run type checks, tests and the production build before release.
+- Test keyboard navigation and responsive layouts at mobile and desktop sizes.
 - Use an isolated preview for review.
 - Do not connect the official domain, change DNS, or replace the current production site without explicit owner approval.
