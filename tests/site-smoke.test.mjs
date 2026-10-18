@@ -16,7 +16,9 @@ test('public page routes and titles are defined', () => {
 test('local clock updates and uses 12-hour time', () => {
   assert.match(app, /window\.setInterval\(\(\) => setNow\(new Date\(\)\), 1000\)/);
   assert.match(app, /hour12: true/);
-  assert.match(app, /weekday: 'short'/);
+  assert.match(app, /weekday: 'long'/);
+  assert.match(app, /month: 'long'/);
+  assert.match(app, /year: 'numeric'/);
 });
 
 test('contact form explains that automated delivery is not configured', () => {

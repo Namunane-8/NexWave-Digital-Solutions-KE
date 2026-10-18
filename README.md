@@ -58,3 +58,7 @@ The initial foundation uses the established NexWave deep green (`#174b3b`), char
 - Test keyboard navigation and responsive layouts at mobile and desktop sizes.
 - Use an isolated preview for review.
 - Do not connect the official domain, change DNS, or replace the current production site without explicit owner approval.
+
+## Build verification checkpoint
+
+The verification branch is intended to exercise the repository CI workflow without changing application behavior or the production deployment.
