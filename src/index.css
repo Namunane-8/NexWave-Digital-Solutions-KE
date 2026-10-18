@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root {
-  font-family: 'DM Sans', Arial, sans-serif;
+  font-family: 'Atkinson Hyperlegible', Arial, sans-serif;
   color: #202a26;
   background: #fff;
   font-synthesis: none;
@@ -23,7 +23,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 body { margin: 0; min-width: 320px; }
-body, button, input, textarea, select { font-family: 'DM Sans', Arial, sans-serif; }
+body, button, input, textarea, select { font-family: 'Atkinson Hyperlegible', Arial, sans-serif; }
 a { color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible { outline: 3px solid #6b8c40; outline-offset: 4px; }
@@ -38,7 +38,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid #6b8c40; outline-offs
 .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1.5px solid var(--green); transform: rotate(45deg); }
 .brand-mark span { width: 13px; height: 13px; display: block; background: var(--green); }
 .wordmark-text { display: flex; flex-direction: column; gap: 3px; font-family: Manrope, sans-serif; font-weight: 800; font-size: 17px; letter-spacing: -.055em; line-height: 1; }
-.wordmark-text span { font-family: 'DM Sans', sans-serif; font-size: 8px; font-weight: 600; letter-spacing: .17em; }
+.wordmark-text span { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 8px; font-weight: 600; letter-spacing: .17em; }
 .primary-nav { display: flex; align-items: center; gap: clamp(20px, 3vw, 42px); }
 .primary-nav > a { text-decoration: none; font-size: 12px; font-weight: 600; transition: color .16s ease; }
 .primary-nav > a:hover, .text-link:hover, .footer-bottom a:hover { color: #5b7b3a; }
