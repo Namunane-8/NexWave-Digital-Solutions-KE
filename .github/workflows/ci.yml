@@ -24,5 +24,7 @@ jobs:
         run: npm install
       - name: Type-check
         run: npm run typecheck
+      - name: Source smoke tests
+        run: npm test
       - name: Build production assets
         run: npm run build
