@@ -210,6 +210,22 @@ function PageLayout({ eyebrow, title, intro, children }: { eyebrow: string; titl
   return <><section className="page-hero section-wrap"><p className="eyebrow"><span className="eyebrow-line" /> {eyebrow}</p><h1>{title}</h1><p className="page-intro">{intro}</p></section><section className="page-body section-wrap">{children}</section></>;
 }
 
+
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const update = () => setVisible(window.scrollY > 360);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+  const goTop = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  };
+  return <button className={`back-to-top ${visible ? 'is-visible' : ''}`} type="button" aria-label="Back to top" title="Back to top" tabIndex={visible ? 0 : -1} onClick={goTop}><svg aria-hidden="true" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 19V5M5 12l7-7 7 7" /></svg></button>;
+}
+
 function App() {
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   const route = pageMeta[path] ? path : '/404';
@@ -221,7 +237,7 @@ function App() {
     if (canonical) canonical.href = `https://nexwavedigitalsolutions.co.ke${route === '/' ? '/' : route}`;
   }, [route]);
 
-  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : <NotFoundPage />}</main><Footer /></div></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
 }
 
 export default App;
