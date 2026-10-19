@@ -161,7 +161,7 @@ function HomePage() {
       </section>
       <section className="trust-strip" aria-label="Our approach"><div className="section-wrap strip-inner"><span>OUR APPROACH</span><p>Clear thinking. Useful technology. Work built around real needs.</p><span className="strip-end">01 — 04</span></div></section>
       <section id="services" className="services section-wrap">
-        <div className="section-heading"><div><p className="eyebrow">WHAT WE DO</p><h2>Services built<br /><em>for momentum.</em></h2></div><p>From first sketch to scaled rollout. Pick one, or stack them. We confirm feasibility, scope, timing and costs before work begins.</p></div>
+        <div className="section-heading"><div><p className="eyebrow">What We Do</p><h2>Services built<br /><em>for momentum.</em></h2></div><p>From first sketch to scaled rollout. Pick one, or stack them.</p></div>
         <div className="home-service-grid">
           {homeServices.map((service) => <a className="home-service-card" href={service.href} key={service.number}>
             <span className="service-number">{service.number}</span><h3>{service.title}</h3><p>{service.description}</p><span className="home-service-destination">{service.note} <Arrow diagonal /></span>
@@ -184,7 +184,7 @@ function HomePage() {
           <div className="newsletter-copy"><p>Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy.</p><a className="button button-primary" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn</a><p className="newsletter-note">Opens LinkedIn directly. Subscription is completed on LinkedIn, not on this website.</p></div>
         </div>
       </section>
-      <section className="contact-band"><div className="section-wrap contact-inner"><div><p className="eyebrow">READY TO BUILD?</p><h2>Ready to build<br /><em>something that lasts?</em></h2></div><div className="contact-action"><p>Tell us where you are and where you want to go. We'll bring the engineering, the brand, and the strategy.</p><a className="button button-light" href="/contact">Work With Us <Arrow /></a><span>Prefer a direct message? <a href="https://wa.me/254700670136?text=Hello%20NexWave%20Digital%20Solutions%2C%20I%27d%20like%20to%20make%20an%20enquiry" target="_blank" rel="noreferrer">Contact via WhatsApp</a></span></div></div></section>
+      <section className="contact-band"><div className="section-wrap contact-inner"><div><p className="eyebrow">READY TO BUILD?</p><h2>Ready to build<br /><em>something that lasts?</em></h2></div><div className="contact-action"><p>Tell us where you are and where you want to go. We'll bring the engineering, the brand, and the strategy.</p><a className="button button-light" href="/contact">Work With Us</a><span>Prefer a direct message? <a href="https://wa.me/254700670136?text=Hello%20NexWave%20Digital%20Solutions%2C%20I%27d%20like%20to%20make%20an%20enquiry" target="_blank" rel="noreferrer">Contact via WhatsApp</a></span></div></div></section>
     </>
   );
 }
@@ -306,7 +306,7 @@ function StorePage() {
         <p className="eyebrow">SECURE CHECKOUT BY SELAR</p>
         <h2 id="store-heading">Browse the current catalogue.</h2>
         <p>Choose a resource from the official store to review its details and current price. Purchases and digital delivery are handled by Selar; NexWave does not collect payment-card details on this website.</p>
-        <a className="button button-primary" href="https://selar.com/m/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Store — Visit NexWave on Selar <Arrow diagonal /></a>
+        <a className="button button-primary" href="https://selar.com/m/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Store — Visit NexWave on Selar</a>
         <p className="store-note">You’ll continue to Selar to review product information and complete any purchase. Prices, availability and payment methods shown there are authoritative.</p>
       </div>
       <div className="store-panel-aside" aria-hidden="true"><span className="store-index">NW / STORE</span><div className="store-orbit"><span /><span /><span /></div><p>LEARN · CREATE · GROW</p></div>
