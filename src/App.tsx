@@ -201,7 +201,7 @@ function ServicesPage() {
   return <PageLayout eyebrow="SERVICES" title={<>Services built<br /><em>for momentum.</em></>} intro="From first sketch to scaled rollout. Pick one, or stack them. We agree the brief, feasibility, scope, timing and cost before work begins.">
     <div className="service-detail-list service-overview-list">{services.map((service) => <article className="service-detail service-overview-item" key={service.number}><span className="service-number">{service.number}</span><div><h2>{service.title}</h2><p>{service.intro}</p><a className="text-link" href={service.href}>{service.link} <Arrow /></a></div></article>)}</div>
     <p className="scope-note">Offerings are scoped to the actual brief and available implementation. Third-party services, provider access, privacy considerations, subscriptions and fees are discussed where relevant. No commercial outcomes are guaranteed.</p>
-    <div className="page-cta"><h2>Not sure where to start?</h2><p>Tell us what you want to improve. We can talk through the options before any work is agreed.</p><a className="button button-primary" href="/contact">Work With Us <Arrow /></a></div>
+    <div className="page-cta"><h2>Not sure where to start?</h2><p>Tell us what you want to improve. We can talk through the options before any work is agreed.</p><a className="button button-primary" href="/contact">Work With Us</a></div>
   </PageLayout>;
 }
 
