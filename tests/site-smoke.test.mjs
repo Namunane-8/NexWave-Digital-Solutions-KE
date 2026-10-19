@@ -146,3 +146,14 @@ test('keyboard focus and reduced motion protections remain present', () => {
   assert.match(styles, /prefers-reduced-motion: reduce/);
   assert.match(app, /aria-controls="primary-navigation"/);
 });
+
+
+test('rendered contrast regression fixes remain present', () => {
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(styles, /\.service-number[^}]*color: #58665d/);
+  assert.match(styles, /\.footer-bottom[^}]*color: #5f6b63/);
+  assert.ok(styles.includes(':root[data-theme="dark"] .footer-main > p'));
+  assert.ok(styles.includes(':root[data-theme="dark"] .button-primary'));
+  assert.ok(styles.includes(':root[data-theme="dark"] .contact-band { color: #ffffff; background: #0c211b; }'));
+  assert.doesNotMatch(app, /aria-label="NexWave Digital Solutions home"/);
+});
