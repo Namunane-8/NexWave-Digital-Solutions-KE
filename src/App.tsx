@@ -127,15 +127,33 @@ function Footer() {
 }
 
 function HomePage() {
+  const homeServices = [
+    { number: '01', title: 'Web Development', description: 'Fast, accessible, conversion-focused websites and platforms built with modern stacks.', href: '/services/websites-digital-experiences', note: 'Websites & digital experiences' },
+    { number: '02', title: 'Branding & Identity', description: 'Visual systems, logos, and brand voices that make you unmistakable in a crowded feed.', href: '/services/digital-strategy-brand-clarity', note: 'Brand clarity & direction' },
+    { number: '03', title: 'Digital Strategy', description: 'Growth roadmaps, funnels, and content systems that turn attention into revenue.', href: '/services/digital-strategy-brand-clarity', note: 'Strategy & content planning' },
+    { number: '04', title: 'AI Workflows', description: 'Custom GPTs, automations, and AI dashboards designed around a clearly scoped workflow.', href: '/services/workflows-automation', note: 'Workflow & automation' },
+    { number: '05', title: 'E-commerce Builds', description: 'Storefronts, checkout journeys, and product pages planned for African and global markets.', href: '/services/ecommerce-online-selling', note: 'E-commerce & online selling' },
+    { number: '06', title: 'Launch Sprints', description: 'Focused two-to-four-week engagements to plan, build, and prepare a product for launch. Scope and readiness depend on the brief.', href: '/contact?service=Launch%20Sprint&returnTo=%2Fservices', note: 'Enquiry-led, agreed scope' },
+  ];
+  const process = [
+    ['01', 'Discover', 'We map your goals, audience, and constraints in one focused session.'],
+    ['02', 'Design', 'Wireframes, brand direction, and a build plan you can actually read.'],
+    ['03', 'Build', 'Weekly demos. Real progress you can see, click, and share.'],
+    ['04', 'Scale', 'Analytics, optimization, and growth experiments after launch, where in scope.'],
+  ];
   return (
     <>
       <section className="hero section-wrap">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="eyebrow-line" /> KENYA · WORKING WITH AMBITION</p>
-          <h1>Make digital work<br /><em>work for you.</em></h1>
-          <p className="hero-intro">We help businesses and growing teams turn digital challenges into useful websites, clearer online selling and simpler day-to-day work.</p>
-          <div className="hero-actions"><a className="button button-primary" href="/contact">Discuss a project <Arrow /></a><a className="text-link" href="/services">Explore our services <Arrow /></a></div>
-          <div className="hero-note"><span className="note-rule" /> A founder-led digital solutions practice focused on practical outcomes, not technology for its own sake.</div>
+          <p className="eyebrow"><span className="eyebrow-line" /> NEXWAVE DIGITAL SOLUTIONS · KENYA</p>
+          <h1>Transforming ideas<br /><em>into digital solutions.</em></h1>
+          <p className="hero-intro">We design, build, and grow digital products for founders and teams who want to move fast without breaking trust.</p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="/contact">Work With Us <Arrow /></a>
+            <a className="text-link" href="/#services">View Services <Arrow /></a>
+            <a className="text-link hero-tertiary" href="/our-story">Learn More <Arrow /></a>
+          </div>
+          <div className="hero-note"><span className="note-rule" /> A founder-led digital solutions practice focused on clear scope, thoughtful engineering and useful outcomes.</div>
         </div>
         <div className="hero-visual" aria-label="Abstract architectural illustration representing connected digital systems" role="img">
           <div className="visual-label">IDEAS, CONNECTED TO ACTION</div><div className="visual-grid" /><div className="visual-frame frame-back" />
@@ -144,19 +162,31 @@ function HomePage() {
         </div>
       </section>
       <section className="trust-strip" aria-label="Our approach"><div className="section-wrap strip-inner"><span>OUR APPROACH</span><p>Clear thinking. Useful technology. Work built around real needs.</p><span className="strip-end">01 — 04</span></div></section>
-      <section className="services section-wrap">
-        <div className="section-heading"><div><p className="eyebrow">WHAT WE DO</p><h2>Digital capability,<br /><em>without the noise.</em></h2></div><p>Start with the problem you need to solve. We’ll help define a practical digital response, agree the scope and build with purpose.</p></div>
-        <div className="service-list">
-          <a className="service-row" href="/services/websites-digital-experiences"><span className="service-number">01</span><div><h3>Websites & digital experiences</h3><p>Clear, responsive websites that help people understand your business and take the next step.</p></div><span className="service-audience">For businesses & teams</span><Arrow diagonal /></a>
-          <a className="service-row" href="/services/ecommerce-online-selling"><span className="service-number">02</span><div><h3>E-commerce & online selling</h3><p>Thoughtful product presentation and buying journeys shaped around your customers and operations.</p></div><span className="service-audience">For sellers & growing brands</span><Arrow diagonal /></a>
-          <a className="service-row" href="/services/digital-strategy-brand-clarity"><span className="service-number">03</span><div><h3>Digital strategy & brand clarity</h3><p>Sharper messaging, useful content structure and a more consistent digital presence.</p></div><span className="service-audience">For teams finding their focus</span><Arrow diagonal /></a>
-          <a className="service-row" href="/services/workflows-automation"><span className="service-number">04</span><div><h3>Practical workflows & automation</h3><p>Explore ways to reduce repetitive work and organise information with carefully scoped digital tools.</p></div><span className="service-audience">For everyday operations</span><Arrow diagonal /></a>
+      <section id="services" className="services section-wrap">
+        <div className="section-heading"><div><p className="eyebrow">WHAT WE DO</p><h2>Services built<br /><em>for momentum.</em></h2></div><p>From first sketch to scaled rollout. Pick one, or stack them. We confirm feasibility, scope, timing and costs before work begins.</p></div>
+        <div className="home-service-grid">
+          {homeServices.map((service) => <a className="home-service-card" href={service.href} key={service.number}>
+            <span className="service-number">{service.number}</span><h3>{service.title}</h3><p>{service.description}</p><span className="home-service-destination">{service.note} <Arrow diagonal /></span>
+          </a>)}
         </div>
-        <p className="scope-note">Every engagement begins with a conversation about needs, scope, timing and cost. Services are agreed before work begins.</p>
+        <p className="scope-note">Capabilities and deliverables depend on the agreed brief, technical feasibility, third-party providers and available access. No commercial results are guaranteed.</p>
+        <div className="services-overview-link"><a className="text-link" href="/services">Explore service details <Arrow /></a></div>
+      </section>
+      <section className="process-section">
+        <div className="section-wrap">
+          <div className="section-heading process-heading"><div><p className="eyebrow">HOW WE WORK</p><h2>A four step rhythm<br /><em>that ships.</em></h2></div><p>No bloated decks. No mystery process. Just a clear path from idea to live product.</p></div>
+          <div className="process-grid">{process.map(([number, title, description]) => <article className="process-step" key={number}><span className="process-number">{number}</span><h3>{title}</h3><p>{description}</p></article>)}</div>
+        </div>
       </section>
       <section className="story-band"><div className="section-wrap story-layout"><div className="story-kicker"><span className="eyebrow-line" /> NEXWAVE / IN PROGRESS</div><div className="story-content"><p className="eyebrow">OUR DEVELOPING STORY</p><h2>Building what<br /><em>comes next.</em></h2><p>NexWave is growing at the intersection of digital innovation, technology and practical problem-solving. We explore emerging approaches, understand real-world challenges and shape digital experiences designed to create meaningful value.</p><p>Our journey is ongoing. Every project begins with understanding a problem, refining the right approach and turning promising ideas into reliable solutions.</p><a className="text-link text-link-light" href="/our-story">Read our story <Arrow /></a></div><div className="story-index"><span>RESEARCH</span><span className="story-index-line" /><span>DESIGN</span><span className="story-index-line" /><span>DEVELOP</span><span className="story-index-line" /><span>IMPROVE</span></div></div></section>
-      <section className="about section-wrap"><div className="about-label"><p className="eyebrow">A PRACTICAL MINDSET</p><span>KENYA, WITH A GLOBAL OUTLOOK</span></div><div className="about-content"><h2>Technology should solve a real problem — <em>and make the next step clearer.</em></h2><p>NexWave Digital Solutions is a founder-led digital business based in Kenya. Our approach is straightforward: understand the need, agree on the work, build with care and be honest about what a solution can deliver.</p><a className="text-link" href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Discover the founder’s work <Arrow diagonal /></a></div></section>
-      <section className="contact-band"><div className="section-wrap contact-inner"><div><p className="eyebrow">HAVE A PROJECT IN MIND?</p><h2>Let’s make a<br /><em>useful next move.</em></h2></div><div className="contact-action"><p>Tell us what you’re trying to achieve. We can discuss the challenge, explore fit and agree a practical next step.</p><a className="button button-light" href="/contact">Contact NexWave <Arrow /></a><span>Prefer a direct message? <a href="https://wa.me/254700670136?text=Hello%20NexWave%20Digital%20Solutions%2C%20I%27d%20like%20to%20make%20an%20enquiry" target="_blank" rel="noreferrer">Contact via WhatsApp</a></span></div></div></section>
+      <section className="about section-wrap"><div className="about-label"><p className="eyebrow">A PRACTICAL MINDSET</p><span>KENYA, WITH A GLOBAL OUTLOOK</span></div><div className="about-content"><h2>Technology should solve a real problem — <em>and make the next step clearer.</em></h2><p>NexWave Digital Solutions is a founder-led digital business based in Kenya. Our approach is straightforward: understand the need, agree on the work, build with care and be honest about what a solution can deliver.</p><a className="text-link" href="/about">Learn about NexWave <Arrow /></a></div></section>
+      <section className="newsletter-section">
+        <div className="section-wrap newsletter-layout">
+          <div><p className="eyebrow">NEXWAVE DIGITAL INSIGHTS</p><h2>NexWave Digital<br /><em>Insights.</em></h2></div>
+          <div className="newsletter-copy"><p>Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy.</p><a className="button button-primary" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn <Arrow diagonal /></a><p className="newsletter-note">Opens LinkedIn directly. Subscription is completed on LinkedIn, not on this website.</p></div>
+        </div>
+      </section>
+      <section className="contact-band"><div className="section-wrap contact-inner"><div><p className="eyebrow">READY TO BUILD?</p><h2>Ready to build<br /><em>something that lasts?</em></h2></div><div className="contact-action"><p>Tell us where you are and where you want to go. We'll bring the engineering, the brand, and the strategy.</p><a className="button button-light" href="/contact">Work With Us <Arrow /></a><span>Prefer a direct message? <a href="https://wa.me/254700670136?text=Hello%20NexWave%20Digital%20Solutions%2C%20I%27d%20like%20to%20make%20an%20enquiry" target="_blank" rel="noreferrer">Contact via WhatsApp</a></span></div></div></section>
     </>
   );
 }
@@ -240,7 +270,7 @@ function ContactPage() {
   const [formState, setFormState] = useState<'idle' | 'prepared'>('idle');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [service, setService] = useState(() => { const requested = new URLSearchParams(window.location.search).get('service'); const allowed = ['Website design & development', 'E-commerce & online selling', 'Digital strategy & branding', 'Workflow & automation', 'Custom digital tool', 'Something else']; return requested && allowed.includes(requested) ? requested : 'Website design & development'; });
+  const [service, setService] = useState(() => { const requested = new URLSearchParams(window.location.search).get('service'); const allowed = ['Website design & development', 'E-commerce & online selling', 'Digital strategy & branding', 'Workflow & automation', 'Launch Sprint', 'Custom digital tool', 'Something else']; return requested && allowed.includes(requested) ? requested : 'Website design & development'; });
   const [details, setDetails] = useState('');
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -254,7 +284,7 @@ function ContactPage() {
       <p className="form-notice" role="status">Automated message delivery is not configured yet. Submitting this form prepares an email in your device’s email application; it does not send anything automatically.</p>
       <label htmlFor="contact-name">Your name</label><input id="contact-name" name="name" autoComplete="name" required maxLength={100} value={name} onChange={(event) => setName(event.target.value)} />
       <label htmlFor="contact-email">Email address</label><input id="contact-email" name="email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={(event) => setEmail(event.target.value)} />
-      <label htmlFor="contact-service">What do you need help with?</label><select id="contact-service" name="service" value={service} onChange={(event) => setService(event.target.value)}><option>Website design & development</option><option>E-commerce & online selling</option><option>Digital strategy & branding</option><option>Workflow & automation</option><option>Custom digital tool</option><option>Something else</option></select>
+      <label htmlFor="contact-service">What do you need help with?</label><select id="contact-service" name="service" value={service} onChange={(event) => setService(event.target.value)}><option>Website design & development</option><option>E-commerce & online selling</option><option>Digital strategy & branding</option><option>Workflow & automation</option><option>Launch Sprint</option><option>Custom digital tool</option><option>Something else</option></select>
       <label htmlFor="contact-details">Tell us about your project</label><textarea id="contact-details" name="details" required minLength={10} maxLength={5000} rows={6} value={details} onChange={(event) => setDetails(event.target.value)} placeholder="What are you trying to achieve? Include any timing or budget details you are comfortable sharing." />
       <button className="button button-primary" type="submit">Prepare email <Arrow /></button>
       {formState === 'prepared' && <p className="form-feedback" role="status">Your email application should open if one is configured. If it does not, contact us directly using the details alongside this form.</p>}
@@ -276,7 +306,7 @@ function StorePage() {
         <p className="eyebrow">SECURE CHECKOUT BY SELAR</p>
         <h2 id="store-heading">Browse the current catalogue.</h2>
         <p>Choose a resource from the official store to review its details and current price. Purchases and digital delivery are handled by Selar; NexWave does not collect payment-card details on this website.</p>
-        <a className="button button-primary" href="https://selar.com/m/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Visit NexWave on Selar <Arrow diagonal /></a>
+        <a className="button button-primary" href="https://selar.com/m/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Store — Visit NexWave on Selar <Arrow diagonal /></a>
         <p className="store-note">You’ll continue to Selar to review product information and complete any purchase. Prices, availability and payment methods shown there are authoritative.</p>
       </div>
       <div className="store-panel-aside" aria-hidden="true"><span className="store-index">NW / STORE</span><div className="store-orbit"><span /><span /><span /></div><p>LEARN · CREATE · GROW</p></div>
@@ -317,11 +347,11 @@ function ContextualBackLink({ route }: { route: string }) {
   if (route === '/contact') {
     const params = new URLSearchParams(window.location.search);
     const requestedReturn = params.get('returnTo');
-    const safeReturn = requestedReturn && Object.prototype.hasOwnProperty.call(servicePages, requestedReturn) ? requestedReturn : undefined;
+    const safeReturn = requestedReturn && (Object.prototype.hasOwnProperty.call(servicePages, requestedReturn) || requestedReturn === '/services') ? requestedReturn : undefined;
     const requestedService = params.get('service');
     const serviceRoute = safeReturn ?? Object.entries(servicePages).find(([, page]) => page.service === requestedService)?.[0];
     if (serviceRoute) {
-      const label = servicePages[serviceRoute].service;
+      const label = servicePages[serviceRoute]?.service ?? 'Services';
       return <div className="contextual-back section-wrap"><a href={serviceRoute}>← Back to {label}</a></div>;
     }
   }
