@@ -45,22 +45,35 @@ function AppearanceControl() {
       return saved === 'light' || saved === 'dark' || saved === 'system' ? saved : 'system';
     } catch { return 'system'; }
   });
+  const [textSize, setTextSize] = useState<'default' | 'large' | 'extra-large'>(() => {
+    try {
+      const saved = window.localStorage.getItem('nexwave-text-size');
+      return saved === 'large' || saved === 'extra-large' || saved === 'default' ? saved : 'default';
+    } catch { return 'default'; }
+  });
   useEffect(() => {
     const root = document.documentElement;
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
     const apply = () => {
-      const dark = preference === 'dark' || (preference === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const dark = preference === 'dark' || (preference === 'system' && media.matches);
       root.dataset.theme = dark ? 'dark' : 'light';
       root.style.colorScheme = dark ? 'dark' : 'light';
     };
     apply();
     try { window.localStorage.setItem('nexwave-appearance', preference); } catch { /* storage may be unavailable */ }
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
     if (preference === 'system') {
       media.addEventListener('change', apply);
       return () => media.removeEventListener('change', apply);
     }
   }, [preference]);
-  return <div className="appearance-control"><label htmlFor="appearance-choice">Appearance</label><select id="appearance-choice" value={preference} onChange={(event) => setPreference(event.target.value as 'light' | 'dark' | 'system')}><option value="light">Light</option><option value="dark">Dark</option><option value="system">System</option></select></div>;
+  useEffect(() => {
+    document.documentElement.dataset.textSize = textSize;
+    try { window.localStorage.setItem('nexwave-text-size', textSize); } catch { /* storage may be unavailable */ }
+  }, [textSize]);
+  return <div className="display-controls" aria-label="Display settings">
+    <div className="appearance-control"><label htmlFor="appearance-choice">Appearance</label><select id="appearance-choice" value={preference} onChange={(event) => setPreference(event.target.value as 'light' | 'dark' | 'system')}><option value="light">Light</option><option value="dark">Dark</option><option value="system">System</option></select></div>
+    <div className="text-size-control"><label htmlFor="text-size-choice">Text size</label><select id="text-size-choice" value={textSize} onChange={(event) => setTextSize(event.target.value as 'default' | 'large' | 'extra-large')}><option value="default">Default</option><option value="large">Large</option><option value="extra-large">Extra Large</option></select></div>
+  </div>;
 }
 
 function Header() {
@@ -275,6 +288,52 @@ function NotFoundPage() {
   return <section className="not-found section-wrap"><p className="eyebrow">ERROR / 404</p><h1>This page could<br /><em>not be found.</em></h1><p>The address may have changed or the link may be incorrect. Return to the homepage or browse the services available on this site.</p><div className="hero-actions"><a className="button button-primary" href="/">Return home <Arrow /></a><a className="text-link" href="/services">Browse services <Arrow /></a></div></section>;
 }
 
+function Breadcrumbs({ route }: { route: string }) {
+  if (route === '/') return null;
+  const labels: Record<string, string> = {
+    '/services': 'Services',
+    '/services/websites-digital-experiences': 'Websites & Digital Experiences',
+    '/services/ecommerce-online-selling': 'E-commerce & Online Selling',
+    '/services/digital-strategy-brand-clarity': 'Digital Strategy & Brand Clarity',
+    '/services/workflows-automation': 'Workflows & Automation',
+    '/about': 'About',
+    '/our-story': 'Our Story',
+    '/contact': 'Contact',
+    '/privacy': 'Privacy',
+    '/store': 'Store',
+    '/404': 'Page Not Found',
+  };
+  const isServiceDetail = Boolean(servicePages[route]);
+  const segments = isServiceDetail
+    ? [{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: labels[route] }]
+    : [{ label: 'Home', href: '/' }, { label: labels[route] ?? 'Page' }];
+  return <nav className="breadcrumbs section-wrap" aria-label="Breadcrumb">
+    <ol>{segments.map((item, index) => <li key={item.href ?? item.label}>{item.href ? <a href={item.href}>{item.label}</a> : <span aria-current="page">{item.label}</span>}{index < segments.length - 1 && <span className="breadcrumb-separator" aria-hidden="true">/</span>}</li>)}</ol>
+  </nav>;
+}
+
+function ContextualBackLink({ route }: { route: string }) {
+  if (servicePages[route]) return <div className="contextual-back section-wrap"><a href="/services">← Back to Services</a></div>;
+  if (route === '/contact') {
+    const requested = new URLSearchParams(window.location.search).get('service');
+    const serviceRoute = Object.entries(servicePages).find(([, page]) => page.service === requested)?.[0];
+    if (serviceRoute) {
+      const label = servicePages[serviceRoute].eyebrow.replace(/^SERVICE \d+ \/ /, '');
+      return <div className="contextual-back section-wrap"><a href={serviceRoute}>← Back to {label.toLowerCase()}</a></div>;
+    }
+  }
+  if (route === '/store') {
+    return <div className="contextual-back section-wrap"><a href="/services" onClick={(event) => {
+      const referrer = document.referrer;
+      if (window.history.length > 1 && referrer.startsWith(window.location.origin)) {
+        event.preventDefault();
+        window.history.back();
+      }
+    }}>← Back to previous page</a></div>;
+  }
+  return null;
+}
+
 function PageLayout({ eyebrow, title, intro, children }: { eyebrow: string; title: ReactNode; intro: string; children: ReactNode }) {
   return <><section className="page-hero section-wrap"><p className="eyebrow"><span className="eyebrow-line" /> {eyebrow}</p><h1>{title}</h1><p className="page-intro">{intro}</p></section><section className="page-body section-wrap">{children}</section></>;
 }
@@ -306,7 +365,7 @@ function App() {
     if (canonical) canonical.href = `https://nexwavedigitalsolutions.co.ke${route === '/' ? '/' : route}`;
   }, [route]);
 
-  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : servicePages[route] ? <ServiceDetailPage page={servicePages[route]} /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : route === '/store' ? <StorePage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><Breadcrumbs route={route} /><ContextualBackLink route={route} /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : servicePages[route] ? <ServiceDetailPage page={servicePages[route]} /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : route === '/store' ? <StorePage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
 }
 
 export default App;
