@@ -8,7 +8,7 @@ const sitemap = readFileSync(new URL('../public/sitemap.xml', import.meta.url), 
 const robots = readFileSync(new URL('../public/robots.txt', import.meta.url), 'utf8');
 
 test('public page routes and titles are defined', () => {
-  for (const route of ['/', '/services', '/about', '/our-story', '/contact', '/privacy', '/404']) {
+  for (const route of ['/', '/services', '/about', '/our-story', '/contact', '/privacy', '/store', '/404']) {
     assert.ok(app.includes(`'${route}'`), `missing route metadata for ${route}`);
   }
 });
@@ -43,4 +43,186 @@ test('SEO entry metadata and sitemap are present', () => {
 
 test('the retired AI Build Lab is not presented in public page content', () => {
   assert.doesNotMatch(app, /AI Build Lab|six speculative AI concepts/i);
+});
+
+test('appearance selector supports Light, Dark and System with persistence', () => {
+  assert.match(app, /nexwave-appearance/);
+  assert.match(app, /value="light">Light/);
+  assert.match(app, /value="dark">Dark/);
+  assert.match(app, /value="system">System/);
+  assert.match(app, /prefers-color-scheme: dark/);
+  assert.match(app, /htmlFor="appearance-choice"/);
+});
+
+test('back-to-top is labelled, scroll-aware and respects reduced motion', () => {
+  assert.match(app, /aria-label="Back to top"/);
+  assert.match(app, /window\.scrollY > 360/);
+  assert.match(app, /window\.scrollTo\(\{ top: 0, behavior: reduceMotion \? 'auto' : 'smooth' \}\)/);
+  assert.match(app, /prefers-reduced-motion: reduce/);
+});
+
+test('theme, focus, responsive and reduced-motion styles are defined', () => {
+  const css = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(css, /:root\[data-theme="dark"\]/);
+  assert.match(css, /\.back-to-top:focus-visible/);
+  assert.match(css, /@media \(max-width: 680px\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /width: 48px/);
+});
+
+test('store page hands off purchases to the known official Selar storefront', () => {
+  assert.match(app, /function StorePage\(\)/);
+  assert.match(app, /href="https:\/\/selar\.com\/m\/nexwave-digital-solutions1952019"/);
+  assert.match(app, /payment-card details on this website/);
+  assert.match(app, /route === '\/store' \? <StorePage \/>/);
+});
+
+test('mobile typography and narrow viewport breakpoints are present', () => {
+  const css = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(css, /@media \(max-width: 360px\)/);
+  assert.match(css, /@media \(max-width: 680px\)/);
+  assert.match(css, /@media \(max-width: 900px\)/);
+  assert.match(css, /font-size: 1rem/);
+  assert.match(css, /font-size: 1\.125rem/);
+});
+
+test('founder page content avoids the removed surname', () => {
+  const removedName = ['Wafu', 'la'].join('');
+  assert.equal(app.toLowerCase().includes(removedName.toLowerCase()), false);
+});
+
+test('each primary service has a dedicated route, title and service-specific content', () => {
+  const routes = [
+    '/services/websites-digital-experiences',
+    '/services/ecommerce-online-selling',
+    '/services/digital-strategy-brand-clarity',
+    '/services/workflows-automation',
+  ];
+  for (const route of routes) assert.ok(app.includes(`'${route}'`), `missing route metadata for ${route}`);
+  assert.match(app, /function ServiceDetailPage/);
+  assert.match(app, /What we can explore/);
+  assert.match(app, /Potential deliverables/);
+  assert.match(app, /How an engagement works/);
+  assert.match(app, /Make a service enquiry/);
+  assert.match(app, /servicePages\[route\]/);
+});
+
+test('homepage service cards point to relevant detail or enquiry destinations', () => {
+  assert.match(app, /title: 'Web Development'.*?href: '\/services\/websites-digital-experiences'/s);
+  assert.match(app, /title: 'Branding & Identity'.*?href: '\/services\/digital-strategy-brand-clarity'/s);
+  assert.match(app, /title: 'Digital Strategy'.*?href: '\/services\/digital-strategy-brand-clarity'/s);
+  assert.match(app, /title: 'AI Workflows'.*?href: '\/services\/workflows-automation'/s);
+  assert.match(app, /title: 'E-commerce Builds'.*?href: '\/services\/ecommerce-online-selling'/s);
+  assert.match(app, /title: 'Launch Sprints'.*?href: '\/contact\?service=Launch%20Sprint&returnTo=%2Fservices'/s);
+});
+
+test('service enquiry query can preselect an allowed service in the contact form', () => {
+  assert.match(app, /new URLSearchParams\(window\.location\.search\)/);
+  assert.match(app, /allowed\.includes\(requested\)/);
+});
+
+
+test('display settings expose three text sizes and three appearance modes', () => {
+  const source = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  for (const label of ['Default', 'Large', 'Extra Large', 'Light', 'Dark', 'System']) assert.ok(source.includes(label), `missing ${label} display option`);
+  assert.ok(source.includes('nexwave-text-size'));
+  assert.ok(source.includes('nexwave-appearance'));
+  assert.ok(source.includes('prefers-color-scheme: dark'));
+  assert.ok(styles.includes('data-text-size="large"'));
+  assert.ok(styles.includes('data-text-size="extra-large"'));
+});
+
+test('internal pages provide labelled breadcrumbs and contextual return links', () => {
+  assert.match(app, /aria-label="Breadcrumb"/);
+  assert.match(app, /aria-current="page"/);
+  assert.match(app, /← Back to Services/);
+  assert.match(app, /window\.history\.back\(\)/);
+  assert.match(app, /returnTo=/);
+  assert.match(app, /Object\.prototype\.hasOwnProperty\.call\(servicePages/);
+});
+
+test('keyboard focus and reduced motion protections remain present', () => {
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(styles, /:focus-visible/);
+  assert.match(styles, /prefers-reduced-motion: reduce/);
+  assert.match(app, /aria-controls="primary-navigation"/);
+});
+
+
+test('rendered contrast regression fixes remain present', () => {
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(styles, /\.service-number[^}]*color: #58665d/);
+  assert.match(styles, /\.footer-bottom[^}]*color: #5f6b63/);
+  assert.ok(styles.includes(':root[data-theme="dark"] .footer-main > p'));
+  assert.ok(styles.includes(':root[data-theme="dark"] .button-primary'));
+  assert.ok(styles.includes(':root[data-theme="dark"] .contact-band { color: #ffffff; background: #0c211b; }'));
+  assert.doesNotMatch(app, /aria-label="NexWave Digital Solutions home"/);
+});
+
+
+test('contextual enquiry return link uses the originating service name', () => {
+  assert.match(app, /const label = servicePages\[serviceRoute\]\?\.service \?\? 'Services'/);
+  assert.match(app, /← Back to \{label\}/);
+});
+
+
+test('service scope-note contrast corrections remain present', () => {
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.ok(styles.includes('.service-detail .detail-scope { max-width: 760px; margin-bottom: 0; color: #58665d;'));
+  assert.ok(styles.includes('.detail-scope { color: #58665d; }'));
+  assert.ok(styles.includes(':root[data-theme="dark"] .detail-scope { color: var(--muted); }'));
+});
+
+
+test('homepage uses approved hero, services, process and closing CTA copy', () => {
+  for (const phrase of [
+    'Transforming ideas',
+    'into digital solutions.',
+    'We design, build, and grow digital products for founders and teams who want to move fast without breaking trust.',
+    'Work With Us',
+    'View Services',
+    'Learn More',
+    'Services built',
+    'for momentum.',
+    'Web Development',
+    'Branding & Identity',
+    'Digital Strategy',
+    'AI Workflows',
+    'E-commerce Builds',
+    'Launch Sprints',
+    'A four step rhythm',
+    'No bloated decks. No mystery process.',
+    'Ready to build',
+    'something that lasts?',
+  ]) assert.ok(app.includes(phrase), `missing approved homepage copy: ${phrase}`);
+});
+
+test('LinkedIn newsletter CTA points directly to the official newsletter follow page', () => {
+  assert.match(app, /NexWave Digital<br \/><em>Insights\.<\/em>/);
+  assert.match(app, /Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy\./);
+  assert.match(app, /href="https:\/\/www\.linkedin\.com\/build-relation\/newsletter-follow\?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn/);
+  assert.match(app, /Subscription is completed on LinkedIn, not on this website/);
+});
+
+test('launch sprint enquiry returns to the service overview and preserves the requested service', () => {
+  assert.match(app, /requestedReturn === '\/services'/);
+  assert.match(app, /<option>Launch Sprint<\/option>/);
+  assert.match(app, /href: '\/contact\?service=Launch%20Sprint&returnTo=%2Fservices'/);
+});
+
+test('the non-official geometric logo placeholder is not presented as the NexWave logo', () => {
+  assert.doesNotMatch(app, /className="brand-mark"/);
+  assert.match(app, /NEXWAVE<span>DIGITAL SOLUTIONS<\/span>/);
+});
+
+
+test('hero CTA labels contain only approved text and Store navigation opens official Selar securely', () => {
+  assert.match(app, /href="\/contact">Work With Us<\/a>/);
+  assert.match(app, /href="\/#services">View Services<\/a>/);
+  assert.match(app, /href="\/our-story">Learn More<\/a>/);
+  assert.doesNotMatch(app, /Work With Us <Arrow|Work With Ussvg/i);
+  assert.match(app, /label: 'Store', href: 'https:\/\/selar\.com\/m\/nexwave-digital-solutions1952019', external: true/);
+  assert.match(app, /target=\{item\.external \? '_blank' : undefined\} rel=\{item\.external \? 'noopener noreferrer' : undefined\}/);
+  assert.match(app, /href="https:\/\/selar\.com\/m\/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Store<\/a>/);
 });
