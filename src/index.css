@@ -206,7 +206,7 @@ h1 em, h2 em { color: var(--green); font-weight: 500; font-style: normal; }
 .service-detail > .service-number { padding-top: 7px; }
 .service-detail h2, .principles-grid h2, .founder-panel h2, .page-cta h2, .contact-details h2, .privacy-copy h2, .story-steps h2 { margin-bottom: 12px; font-family: Manrope, sans-serif; font-size: clamp(1.3125rem, 2.4vw, 1.8125rem); letter-spacing: -.045em; font-weight: 600; }
 .service-detail p, .principles-grid p, .founder-panel p, .page-cta p, .privacy-copy p, .story-steps p { color: var(--muted); font-size: 0.8125rem; line-height: 1.85; }
-.service-detail .detail-scope { max-width: 760px; margin-bottom: 0; color: #748078; font-size: 0.75rem; }
+.service-detail .detail-scope { max-width: 760px; margin-bottom: 0; color: #58665d; font-size: 0.75rem; }
 .page-cta { margin-top: 65px; padding: clamp(28px, 5vw, 54px); background: var(--soft); border-left: 3px solid var(--green); }
 .page-cta h2 { font-size: clamp(1.6875rem, 3vw, 2.25rem); }
 .page-cta p { max-width: 610px; margin-bottom: 23px; }
@@ -625,3 +625,6 @@ html[data-text-size="extra-large"] { font-size: 125%; }
 :root[data-theme="dark"] .button-primary,
 :root[data-theme="dark"] .button-primary:hover { color: #0c211b; background: #9ed7bd; }
 :root[data-theme="dark"] .contact-band { color: #ffffff; background: #0c211b; }
+
+.detail-scope { color: #58665d; }
+:root[data-theme="dark"] .detail-scope { color: var(--muted); }
