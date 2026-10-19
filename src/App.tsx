@@ -227,7 +227,7 @@ function ContactPage() {
   const [formState, setFormState] = useState<'idle' | 'prepared'>('idle');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [service, setService] = useState('Website design & development');
+  const [service, setService] = useState(() => { const requested = new URLSearchParams(window.location.search).get('service'); const allowed = ['Website design & development', 'E-commerce & online selling', 'Digital strategy & branding', 'Workflow & automation', 'Custom digital tool', 'Something else']; return requested && allowed.includes(requested) ? requested : 'Website design & development'; });
   const [details, setDetails] = useState('');
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
