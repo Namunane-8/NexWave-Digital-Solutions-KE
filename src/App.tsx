@@ -193,15 +193,17 @@ function HomePage() {
 
 function ServicesPage() {
   const services = [
-    ['01', 'Website design & development', 'Responsive business websites and focused digital experiences that make your offer clear and help visitors take the next step.', 'Typical scope can include site structure, responsive implementation, enquiry journeys, search-engine foundations and agreed integrations.'],
-    ['02', 'E-commerce & online selling', 'Product presentation and buying journeys shaped around your customers, catalogue and business operations.', 'Platform subscriptions, payment processing, shipping and third-party integrations depend on the agreed setup and provider terms.'],
-    ['03', 'Digital strategy & brand clarity', 'Positioning, messaging, content structure and brand consistency that make your digital presence easier to understand.', 'The work begins with your goals and current materials. Sales or growth outcomes are not guaranteed.'],
-    ['04', 'Practical workflows & automation', 'Carefully scoped ways to reduce repetitive tasks and organise information using suitable digital tools.', 'Any AI or third-party integration is agreed in advance and requires appropriate account access, privacy review and any applicable provider fees.'],
-    ['05', 'Custom digital tools', 'Small, focused web tools or dashboards considered around a specific operational need.', 'Feasibility, data access, maintenance and ownership are discussed before a build is approved.'],
+    { number: '01', title: 'Web Development', intro: 'Fast, accessible, conversion-focused websites and platforms built with modern stacks.', href: '/services/websites-digital-experiences', link: 'Explore website services' },
+    { number: '02', title: 'Branding & Identity', intro: 'Visual identity, brand messaging and practical guidance for a clearer, more consistent presence.', href: '/services/digital-strategy-brand-clarity', link: 'Explore brand and strategy services' },
+    { number: '03', title: 'Digital Strategy', intro: 'Growth roadmaps, funnels and content systems planned around your audience and goals.', href: '/services/digital-strategy-brand-clarity', link: 'Explore strategy services' },
+    { number: '04', title: 'AI Workflows', intro: 'Scoped workflow automation, AI-assisted processes and dashboard concepts where feasible.', href: '/services/workflows-automation', link: 'Explore workflow services' },
+    { number: '05', title: 'E-commerce Builds', intro: 'Storefront structure, product pages and buying journeys suited to your business and chosen providers.', href: '/services/ecommerce-online-selling', link: 'Explore e-commerce services' },
+    { number: '06', title: 'Launch Sprints', intro: 'Focused two-to-four-week engagements to define, build and prepare a product for launch. Scope and readiness depend on the brief.', href: '/contact?service=Launch%20Sprint&returnTo=%2Fservices', link: 'Enquire about a launch sprint' },
   ];
-  return <PageLayout eyebrow="SERVICES" title={<>Digital work, scoped<br /><em>around real needs.</em></>} intro="Choose the area closest to your goal. If you are unsure which service fits, describe the challenge and we can discuss the best next step before agreeing on scope, timing and cost.">
-    <div className="service-detail-list">{services.map(([number, title, intro, scope]) => <article className="service-detail" key={number}><span className="service-number">{number}</span><div><h2>{title}</h2><p>{intro}</p><p className="detail-scope">{scope}</p></div></article>)}</div>
-    <div className="page-cta"><h2>Not sure where to start?</h2><p>Tell us what you want to improve. We can talk through the options before any work is agreed.</p><a className="button button-primary" href="/contact">Discuss your project <Arrow /></a></div>
+  return <PageLayout eyebrow="SERVICES" title={<>Services built<br /><em>for momentum.</em></>} intro="From first sketch to scaled rollout. Pick one, or stack them. We agree the brief, feasibility, scope, timing and cost before work begins.">
+    <div className="service-detail-list service-overview-list">{services.map((service) => <article className="service-detail service-overview-item" key={service.number}><span className="service-number">{service.number}</span><div><h2>{service.title}</h2><p>{service.intro}</p><a className="text-link" href={service.href}>{service.link} <Arrow /></a></div></article>)}</div>
+    <p className="scope-note">Offerings are scoped to the actual brief and available implementation. Third-party services, provider access, privacy considerations, subscriptions and fees are discussed where relevant. No commercial outcomes are guaranteed.</p>
+    <div className="page-cta"><h2>Not sure where to start?</h2><p>Tell us what you want to improve. We can talk through the options before any work is agreed.</p><a className="button button-primary" href="/contact">Work With Us <Arrow /></a></div>
   </PageLayout>;
 }
 
