@@ -118,3 +118,31 @@ test('service enquiry query can preselect an allowed service in the contact form
   assert.match(app, /new URLSearchParams\(window\.location\.search\)/);
   assert.match(app, /allowed\.includes\(requested\)/);
 });
+
+
+test('display settings expose three text sizes and three appearance modes', () => {
+  const source = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8');
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  for (const label of ['Default', 'Large', 'Extra Large', 'Light', 'Dark', 'System']) assert.ok(source.includes(label), `missing ${label} display option`);
+  assert.ok(source.includes('nexwave-text-size'));
+  assert.ok(source.includes('nexwave-appearance'));
+  assert.ok(source.includes('prefers-color-scheme: dark'));
+  assert.ok(styles.includes('data-text-size="large"'));
+  assert.ok(styles.includes('data-text-size="extra-large"'));
+});
+
+test('internal pages provide labelled breadcrumbs and contextual return links', () => {
+  assert.match(app, /aria-label="Breadcrumb"/);
+  assert.match(app, /aria-current="page"/);
+  assert.match(app, /← Back to Services/);
+  assert.match(app, /window\.history\.back\(\)/);
+  assert.match(app, /returnTo=/);
+  assert.match(app, /Object\.prototype\.hasOwnProperty\.call\(servicePages/);
+});
+
+test('keyboard focus and reduced motion protections remain present', () => {
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.match(styles, /:focus-visible/);
+  assert.match(styles, /prefers-reduced-motion: reduce/);
+  assert.match(app, /aria-controls="primary-navigation"/);
+});
