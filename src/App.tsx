@@ -88,7 +88,6 @@ function Header() {
   return (
     <header className="site-header">
       <a className="wordmark" href="/">
-        <span className="brand-mark" aria-hidden="true"><span /></span>
         <span className="wordmark-text">NEXWAVE<span>DIGITAL SOLUTIONS</span></span>
       </a>
       <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="primary-navigation" onClick={() => setMenuOpen((open) => !open)}>
@@ -108,7 +107,6 @@ function Footer() {
     <footer className="site-footer">
       <div className="footer-main">
         <a className="wordmark footer-wordmark" href="/">
-          <span className="brand-mark" aria-hidden="true"><span /></span>
           <span className="wordmark-text">NEXWAVE<span>DIGITAL SOLUTIONS</span></span>
         </a>
         <p>Practical digital progress, built with purpose.</p>
