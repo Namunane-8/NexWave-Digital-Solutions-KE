@@ -107,11 +107,13 @@ test('each primary service has a dedicated route, title and service-specific con
   assert.match(app, /servicePages\[route\]/);
 });
 
-test('homepage service cards point to their dedicated service pages', () => {
-  assert.match(app, /href="\/services\/websites-digital-experiences"><span className="service-number">01/);
-  assert.match(app, /href="\/services\/ecommerce-online-selling"><span className="service-number">02/);
-  assert.match(app, /href="\/services\/digital-strategy-brand-clarity"><span className="service-number">03/);
-  assert.match(app, /href="\/services\/workflows-automation"><span className="service-number">04/);
+test('homepage service cards point to relevant detail or enquiry destinations', () => {
+  assert.match(app, /title: 'Web Development'.*?href: '\/services\/websites-digital-experiences'/s);
+  assert.match(app, /title: 'Branding & Identity'.*?href: '\/services\/digital-strategy-brand-clarity'/s);
+  assert.match(app, /title: 'Digital Strategy'.*?href: '\/services\/digital-strategy-brand-clarity'/s);
+  assert.match(app, /title: 'AI Workflows'.*?href: '\/services\/workflows-automation'/s);
+  assert.match(app, /title: 'E-commerce Builds'.*?href: '\/services\/ecommerce-online-selling'/s);
+  assert.match(app, /title: 'Launch Sprints'.*?href: '\/contact\?service=Launch%20Sprint&returnTo=%2Fservices'/s);
 });
 
 test('service enquiry query can preselect an allowed service in the contact form', () => {
@@ -170,4 +172,46 @@ test('service scope-note contrast corrections remain present', () => {
   assert.ok(styles.includes('.service-detail .detail-scope { max-width: 760px; margin-bottom: 0; color: #58665d;'));
   assert.ok(styles.includes('.detail-scope { color: #58665d; }'));
   assert.ok(styles.includes(':root[data-theme="dark"] .detail-scope { color: var(--muted); }'));
+});
+
+
+test('homepage uses approved hero, services, process and closing CTA copy', () => {
+  for (const phrase of [
+    'Transforming ideas',
+    'into digital solutions.',
+    'We design, build, and grow digital products for founders and teams who want to move fast without breaking trust.',
+    'Work With Us',
+    'View Services',
+    'Learn More',
+    'Services built',
+    'for momentum.',
+    'Web Development',
+    'Branding & Identity',
+    'Digital Strategy',
+    'AI Workflows',
+    'E-commerce Builds',
+    'Launch Sprints',
+    'A four step rhythm',
+    'No bloated decks. No mystery process.',
+    'Ready to build',
+    'something that lasts?',
+  ]) assert.ok(app.includes(phrase), `missing approved homepage copy: ${phrase}`);
+});
+
+test('LinkedIn newsletter CTA points directly to the official newsletter follow page', () => {
+  assert.match(app, /NexWave Digital Insights/);
+  assert.match(app, /Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy\./);
+  assert.match(app, /href="https:\/\/www\.linkedin\.com\/build-relation\/newsletter-follow\?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn/);
+  assert.match(app, /Subscription is completed on LinkedIn, not on this website/);
+});
+
+test('launch sprint enquiry returns to the service overview and preserves the requested service', () => {
+  assert.match(app, /requestedReturn === '\/services'/);
+  assert.match(app, /<option>Launch Sprint<\/option>/);
+  assert.match(app, /href="\/contact\?service=Launch%20Sprint&returnTo=%2Fservices"/);
+});
+
+test('the non-official geometric logo placeholder is not presented as the NexWave logo', () => {
+  assert.doesNotMatch(app, /className="brand-mark"/);
+  assert.match(app, /NEXWAVE<span>DIGITAL SOLUTIONS<\/span>/);
 });
