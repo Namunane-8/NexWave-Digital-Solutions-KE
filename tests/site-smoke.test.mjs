@@ -82,8 +82,8 @@ test('mobile typography and narrow viewport breakpoints are present', () => {
   assert.match(css, /@media \(max-width: 360px\)/);
   assert.match(css, /@media \(max-width: 680px\)/);
   assert.match(css, /@media \(max-width: 900px\)/);
-  assert.match(css, /font-size: 16px/);
-  assert.match(css, /font-size: 18px/);
+  assert.match(css, /font-size: 1rem/);
+  assert.match(css, /font-size: 1\\.125rem/);
 });
 
 test('founder page content avoids the removed surname', () => {
