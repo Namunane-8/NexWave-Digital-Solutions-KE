@@ -321,8 +321,8 @@ function ContextualBackLink({ route }: { route: string }) {
     const requestedService = params.get('service');
     const serviceRoute = safeReturn ?? Object.entries(servicePages).find(([, page]) => page.service === requestedService)?.[0];
     if (serviceRoute) {
-      const label = servicePages[serviceRoute].eyebrow.replace(/^SERVICE \d+ \/ /, '');
-      return <div className="contextual-back section-wrap"><a href={serviceRoute}>← Back to {label.toLowerCase()}</a></div>;
+      const label = servicePages[serviceRoute].service;
+      return <div className="contextual-back section-wrap"><a href={serviceRoute}>← Back to {label}</a></div>;
     }
   }
   if (route === '/store') {
