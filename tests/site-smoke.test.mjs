@@ -90,3 +90,31 @@ test('founder page content avoids the removed surname', () => {
   const removedName = ['Wafu', 'la'].join('');
   assert.equal(app.toLowerCase().includes(removedName.toLowerCase()), false);
 });
+
+test('each primary service has a dedicated route, title and service-specific content', () => {
+  const routes = [
+    '/services/websites-digital-experiences',
+    '/services/ecommerce-online-selling',
+    '/services/digital-strategy-brand-clarity',
+    '/services/workflows-automation',
+  ];
+  for (const route of routes) assert.ok(app.includes(`'${route}'`), `missing route metadata for ${route}`);
+  assert.match(app, /function ServiceDetailPage/);
+  assert.match(app, /What we can explore/);
+  assert.match(app, /Potential deliverables/);
+  assert.match(app, /How an engagement works/);
+  assert.match(app, /Make a service enquiry/);
+  assert.match(app, /servicePages\[route\]/);
+});
+
+test('homepage service cards point to their dedicated service pages', () => {
+  assert.match(app, /href="\/services\/websites-digital-experiences"><span className="service-number">01/);
+  assert.match(app, /href="\/services\/ecommerce-online-selling"><span className="service-number">02/);
+  assert.match(app, /href="\/services\/digital-strategy-brand-clarity"><span className="service-number">03/);
+  assert.match(app, /href="\/services\/workflows-automation"><span className="service-number">04/);
+});
+
+test('service enquiry query can preselect an allowed service in the contact form', () => {
+  assert.match(app, /new URLSearchParams\(window\.location\.search\)/);
+  assert.match(app, /allowed\.includes\(requested\)/);
+});
