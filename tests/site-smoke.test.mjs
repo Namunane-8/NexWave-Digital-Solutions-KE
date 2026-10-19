@@ -162,7 +162,7 @@ test('rendered contrast regression fixes remain present', () => {
 
 
 test('contextual enquiry return link uses the originating service name', () => {
-  assert.match(app, /const label = servicePages\[serviceRoute\]\.service/);
+  assert.match(app, /const label = servicePages\[serviceRoute\]\?\.service \?\? 'Services'/);
   assert.match(app, /← Back to \{label\}/);
 });
 
@@ -199,7 +199,7 @@ test('homepage uses approved hero, services, process and closing CTA copy', () =
 });
 
 test('LinkedIn newsletter CTA points directly to the official newsletter follow page', () => {
-  assert.match(app, /NexWave Digital Insights/);
+  assert.match(app, /NexWave Digital<br \/><em>Insights\.<\/em>/);
   assert.match(app, /Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy\./);
   assert.match(app, /href="https:\/\/www\.linkedin\.com\/build-relation\/newsletter-follow\?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn/);
   assert.match(app, /Subscription is completed on LinkedIn, not on this website/);
@@ -208,7 +208,7 @@ test('LinkedIn newsletter CTA points directly to the official newsletter follow 
 test('launch sprint enquiry returns to the service overview and preserves the requested service', () => {
   assert.match(app, /requestedReturn === '\/services'/);
   assert.match(app, /<option>Launch Sprint<\/option>/);
-  assert.match(app, /href="\/contact\?service=Launch%20Sprint&returnTo=%2Fservices"/);
+  assert.match(app, /href: '\/contact\?service=Launch%20Sprint&returnTo=%2Fservices'/);
 });
 
 test('the non-official geometric logo placeholder is not presented as the NexWave logo', () => {
