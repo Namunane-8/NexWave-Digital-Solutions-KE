@@ -163,3 +163,11 @@ test('contextual enquiry return link uses the originating service name', () => {
   assert.match(app, /const label = servicePages\[serviceRoute\]\.service/);
   assert.match(app, /← Back to \{label\}/);
 });
+
+
+test('service scope-note contrast corrections remain present', () => {
+  const styles = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8');
+  assert.ok(styles.includes('.service-detail .detail-scope { max-width: 760px; margin-bottom: 0; color: #58665d;'));
+  assert.ok(styles.includes('.detail-scope { color: #58665d; }'));
+  assert.ok(styles.includes(':root[data-theme="dark"] .detail-scope { color: var(--muted); }'));
+});
