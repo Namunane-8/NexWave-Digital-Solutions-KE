@@ -87,7 +87,7 @@ function Header() {
   }, []);
   return (
     <header className="site-header">
-      <a className="wordmark" href="/" aria-label="NexWave Digital Solutions home">
+      <a className="wordmark" href="/">
         <span className="brand-mark" aria-hidden="true"><span /></span>
         <span className="wordmark-text">NEXWAVE<span>DIGITAL SOLUTIONS</span></span>
       </a>
