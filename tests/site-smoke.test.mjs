@@ -215,3 +215,14 @@ test('the non-official geometric logo placeholder is not presented as the NexWav
   assert.doesNotMatch(app, /className="brand-mark"/);
   assert.match(app, /NEXWAVE<span>DIGITAL SOLUTIONS<\/span>/);
 });
+
+
+test('hero CTA labels contain only approved text and Store navigation opens official Selar securely', () => {
+  assert.match(app, /href="\/contact">Work With Us<\/a>/);
+  assert.match(app, /href="\/#services">View Services<\/a>/);
+  assert.match(app, /href="\/our-story">Learn More<\/a>/);
+  assert.doesNotMatch(app, /Work With Us <Arrow|Work With Ussvg/i);
+  assert.match(app, /label: 'Store', href: 'https:\/\/selar\.com\/m\/nexwave-digital-solutions1952019', external: true/);
+  assert.match(app, /target=\{item\.external \? '_blank' : undefined\} rel=\{item\.external \? 'noopener noreferrer' : undefined\}/);
+  assert.match(app, /href="https:\/\/selar\.com\/m\/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Store<\/a>/);
+});
