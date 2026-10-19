@@ -157,3 +157,9 @@ test('rendered contrast regression fixes remain present', () => {
   assert.ok(styles.includes(':root[data-theme="dark"] .contact-band { color: #ffffff; background: #0c211b; }'));
   assert.doesNotMatch(app, /aria-label="NexWave Digital Solutions home"/);
 });
+
+
+test('contextual enquiry return link uses the originating service name', () => {
+  assert.match(app, /const label = servicePages\[serviceRoute\]\.service/);
+  assert.match(app, /← Back to \{label\}/);
+});
