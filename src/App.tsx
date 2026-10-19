@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 
-const navItems = [
+const navItems: { label: string; href: string; external?: boolean }[] = [
   { label: 'Services', href: '/services' },
   { label: 'Our story', href: '/our-story' },
   { label: 'About', href: '/about' },
-  { label: 'Store', href: '/store' },
+  { label: 'Store', href: 'https://selar.com/m/nexwave-digital-solutions1952019', external: true },
 ];
 
 const pageMeta: Record<string, { title: string; description: string }> = {
@@ -94,7 +94,7 @@ function Header() {
         <span>{menuOpen ? 'Close' : 'Menu'}</span><span className="menu-lines" aria-hidden="true" />
       </button>
       <nav id="primary-navigation" className={`primary-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Primary navigation">
-        {navItems.map((item) => <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>)}
+        {navItems.map((item) => <a key={item.href} href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} onClick={() => setMenuOpen(false)}>{item.label}</a>)}
         <a href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Founder <Arrow diagonal /></a>
         <AppearanceControl /><a className="nav-contact" href="/contact" onClick={() => setMenuOpen(false)}>Start a conversation <Arrow /></a>
       </nav>
@@ -113,7 +113,7 @@ function Footer() {
         <a className="footer-founder" href="https://www.namunane.co.ke/" target="_blank" rel="noreferrer">Meet the founder <Arrow diagonal /></a>
       </div>
       <div className="footer-links" aria-label="Footer navigation">
-        <a href="/services">Services</a><a href="/our-story">Our story</a><a href="/about">About</a><a href="/store">Store</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a>
+        <a href="/services">Services</a><a href="/our-story">Our story</a><a href="/about">About</a><a href="https://selar.com/m/nexwave-digital-solutions1952019" target="_blank" rel="noopener noreferrer">Store</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a>
       </div>
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} NexWave Digital Solutions</span>
@@ -147,9 +147,9 @@ function HomePage() {
           <h1>Transforming ideas<br /><em>into digital solutions.</em></h1>
           <p className="hero-intro">We design, build, and grow digital products for founders and teams who want to move fast without breaking trust.</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="/contact">Work With Us <Arrow /></a>
-            <a className="text-link" href="/#services">View Services <Arrow /></a>
-            <a className="text-link hero-tertiary" href="/our-story">Learn More <Arrow /></a>
+            <a className="button button-primary" href="/contact">Work With Us</a>
+            <a className="text-link" href="/#services">View Services</a>
+            <a className="text-link hero-tertiary" href="/our-story">Learn More</a>
           </div>
           <div className="hero-note"><span className="note-rule" /> A founder-led digital solutions practice focused on clear scope, thoughtful engineering and useful outcomes.</div>
         </div>
@@ -181,7 +181,7 @@ function HomePage() {
       <section className="newsletter-section">
         <div className="section-wrap newsletter-layout">
           <div><p className="eyebrow">NEXWAVE DIGITAL INSIGHTS</p><h2>NexWave Digital<br /><em>Insights.</em></h2></div>
-          <div className="newsletter-copy"><p>Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy.</p><a className="button button-primary" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn <Arrow diagonal /></a><p className="newsletter-note">Opens LinkedIn directly. Subscription is completed on LinkedIn, not on this website.</p></div>
+          <div className="newsletter-copy"><p>Weekly insights on AI, digital innovation, startups, and scalable tech solutions across Africa’s digital economy.</p><a className="button button-primary" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7458460529456726016" target="_blank" rel="noopener noreferrer">Subscribe on LinkedIn</a><p className="newsletter-note">Opens LinkedIn directly. Subscription is completed on LinkedIn, not on this website.</p></div>
         </div>
       </section>
       <section className="contact-band"><div className="section-wrap contact-inner"><div><p className="eyebrow">READY TO BUILD?</p><h2>Ready to build<br /><em>something that lasts?</em></h2></div><div className="contact-action"><p>Tell us where you are and where you want to go. We'll bring the engineering, the brand, and the strategy.</p><a className="button button-light" href="/contact">Work With Us <Arrow /></a><span>Prefer a direct message? <a href="https://wa.me/254700670136?text=Hello%20NexWave%20Digital%20Solutions%2C%20I%27d%20like%20to%20make%20an%20enquiry" target="_blank" rel="noreferrer">Contact via WhatsApp</a></span></div></div></section>
