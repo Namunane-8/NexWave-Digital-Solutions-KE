@@ -11,6 +11,10 @@ const navItems = [
 const pageMeta: Record<string, { title: string; description: string }> = {
   '/': { title: 'NexWave Digital Solutions — Brighter Digital Future', description: 'NexWave Digital Solutions helps businesses build useful websites, clearer online selling experiences and practical digital workflows.' },
   '/services': { title: 'Services | NexWave Digital Solutions', description: 'Explore website development, e-commerce, digital strategy, branding and practical workflow services from NexWave Digital Solutions.' },
+  '/services/websites-digital-experiences': { title: 'Websites & Digital Experiences | NexWave Digital Solutions', description: 'Plan a clear, responsive website or digital experience around your business goals and visitors.' },
+  '/services/ecommerce-online-selling': { title: 'E-commerce & Online Selling | NexWave Digital Solutions', description: 'Shape product presentation and online selling journeys around your customers and operations.' },
+  '/services/digital-strategy-brand-clarity': { title: 'Digital Strategy & Brand Clarity | NexWave Digital Solutions', description: 'Clarify your digital priorities, messaging and brand presentation with a practical, scoped approach.' },
+  '/services/workflows-automation': { title: 'Practical Workflows & Automation | NexWave Digital Solutions', description: 'Explore scoped workflow improvements and automation options for repetitive digital work.' },
   '/about': { title: 'About NexWave Digital Solutions', description: 'Learn about NexWave Digital Solutions, a founder-led digital business based in Kenya with a practical approach to technology.' },
   '/our-story': { title: 'Our Developing Story | NexWave Digital Solutions', description: 'Discover the ongoing NexWave journey in digital innovation, technology and practical problem-solving.' },
   '/contact': { title: 'Contact NexWave Digital Solutions', description: 'Tell NexWave Digital Solutions about your digital project, business challenge or enquiry.' },
@@ -130,10 +134,10 @@ function HomePage() {
       <section className="services section-wrap">
         <div className="section-heading"><div><p className="eyebrow">WHAT WE DO</p><h2>Digital capability,<br /><em>without the noise.</em></h2></div><p>Start with the problem you need to solve. We’ll help define a practical digital response, agree the scope and build with purpose.</p></div>
         <div className="service-list">
-          <a className="service-row" href="/services"><span className="service-number">01</span><div><h3>Websites & digital experiences</h3><p>Clear, responsive websites that help people understand your business and take the next step.</p></div><span className="service-audience">For businesses & teams</span><Arrow diagonal /></a>
-          <a className="service-row" href="/services"><span className="service-number">02</span><div><h3>E-commerce & online selling</h3><p>Thoughtful product presentation and buying journeys shaped around your customers and operations.</p></div><span className="service-audience">For sellers & growing brands</span><Arrow diagonal /></a>
-          <a className="service-row" href="/services"><span className="service-number">03</span><div><h3>Digital strategy & brand clarity</h3><p>Sharper messaging, useful content structure and a more consistent digital presence.</p></div><span className="service-audience">For teams finding their focus</span><Arrow diagonal /></a>
-          <a className="service-row" href="/services"><span className="service-number">04</span><div><h3>Practical workflows & automation</h3><p>Explore ways to reduce repetitive work and organise information with carefully scoped digital tools.</p></div><span className="service-audience">For everyday operations</span><Arrow diagonal /></a>
+          <a className="service-row" href="/services/websites-digital-experiences"><span className="service-number">01</span><div><h3>Websites & digital experiences</h3><p>Clear, responsive websites that help people understand your business and take the next step.</p></div><span className="service-audience">For businesses & teams</span><Arrow diagonal /></a>
+          <a className="service-row" href="/services/ecommerce-online-selling"><span className="service-number">02</span><div><h3>E-commerce & online selling</h3><p>Thoughtful product presentation and buying journeys shaped around your customers and operations.</p></div><span className="service-audience">For sellers & growing brands</span><Arrow diagonal /></a>
+          <a className="service-row" href="/services/digital-strategy-brand-clarity"><span className="service-number">03</span><div><h3>Digital strategy & brand clarity</h3><p>Sharper messaging, useful content structure and a more consistent digital presence.</p></div><span className="service-audience">For teams finding their focus</span><Arrow diagonal /></a>
+          <a className="service-row" href="/services/workflows-automation"><span className="service-number">04</span><div><h3>Practical workflows & automation</h3><p>Explore ways to reduce repetitive work and organise information with carefully scoped digital tools.</p></div><span className="service-audience">For everyday operations</span><Arrow diagonal /></a>
         </div>
         <p className="scope-note">Every engagement begins with a conversation about needs, scope, timing and cost. Services are agreed before work begins.</p>
       </section>
@@ -155,6 +159,53 @@ function ServicesPage() {
   return <PageLayout eyebrow="SERVICES" title={<>Digital work, scoped<br /><em>around real needs.</em></>} intro="Choose the area closest to your goal. If you are unsure which service fits, describe the challenge and we can discuss the best next step before agreeing on scope, timing and cost.">
     <div className="service-detail-list">{services.map(([number, title, intro, scope]) => <article className="service-detail" key={number}><span className="service-number">{number}</span><div><h2>{title}</h2><p>{intro}</p><p className="detail-scope">{scope}</p></div></article>)}</div>
     <div className="page-cta"><h2>Not sure where to start?</h2><p>Tell us what you want to improve. We can talk through the options before any work is agreed.</p><a className="button button-primary" href="/contact">Discuss your project <Arrow /></a></div>
+  </PageLayout>;
+}
+
+
+const servicePages: Record<string, { eyebrow: string; title: ReactNode; intro: string; capabilities: string[]; deliverables: string[]; process: string[]; enquiry: string; service: string }> = {
+  '/services/websites-digital-experiences': {
+    eyebrow: 'SERVICE 01 / WEBSITES', title: <>Websites & digital<br /><em>experiences.</em></>,
+    intro: 'Build a clear, responsive digital home that helps visitors understand your offer, find important information and take the next step. The right scope depends on your audience, content and business goals.',
+    capabilities: ['Information architecture and page structure', 'Responsive front-end design and implementation', 'Contact and enquiry journeys', 'Search-friendly page titles and metadata', 'Agreed third-party integrations and handover'],
+    deliverables: ['An agreed sitemap and page plan', 'A responsive website within the approved scope', 'Contact links or forms appropriate to the setup', 'Launch checklist and handover notes where included'],
+    process: ['Discuss the audience, goals, content and constraints', 'Agree the page scope, responsibilities, timing and cost', 'Design and build the agreed experience', 'Review, test and prepare the handover'],
+    enquiry: 'Tell us about the website you need.', service: 'Website design & development'
+  },
+  '/services/ecommerce-online-selling': {
+    eyebrow: 'SERVICE 02 / ONLINE SELLING', title: <>E-commerce &<br /><em>online selling.</em></>,
+    intro: 'Make it easier for customers to understand what you offer and move through an online buying journey. The setup should fit your catalogue, operations, payment provider and delivery model.',
+    capabilities: ['Product and offer information structure', 'Storefront and category presentation', 'Customer journey and checkout handoff review', 'Links to suitable third-party selling platforms', 'Practical content and store-management guidance'],
+    deliverables: ['A scoped store or storefront improvement plan', 'Product-page and catalogue structure as agreed', 'Configured links or integrations within scope', 'A handover covering agreed workflows and limitations'],
+    process: ['Review products, customers and how orders are handled', 'Agree the platform, scope, dependencies and provider costs', 'Implement the agreed presentation and buying journey', 'Check the customer handoff and document next steps'],
+    enquiry: 'Describe your products and selling goals.', service: 'E-commerce & online selling'
+  },
+  '/services/digital-strategy-brand-clarity': {
+    eyebrow: 'SERVICE 03 / STRATEGY', title: <>Digital strategy &<br /><em>brand clarity.</em></>,
+    intro: 'Create a clearer direction for your digital presence by aligning your goals, audience, messaging and content. Recommendations are based on the materials and context available, not guaranteed commercial outcomes.',
+    capabilities: ['Digital presence and content review', 'Audience and offer clarification', 'Website messaging and content hierarchy', 'Brand consistency across agreed touchpoints', 'Prioritised, practical next-step recommendations'],
+    deliverables: ['A concise priorities and opportunities summary', 'Messaging or page-structure recommendations', 'An agreed content outline or brand-use guidance', 'A practical action plan matched to the agreed scope'],
+    process: ['Understand your goals, audience and current materials', 'Identify gaps and agree the questions to resolve', 'Develop recommendations and draft content direction', 'Review together and prioritise practical next steps'],
+    enquiry: 'Tell us what needs to become clearer.', service: 'Digital strategy & branding'
+  },
+  '/services/workflows-automation': {
+    eyebrow: 'SERVICE 04 / WORKFLOWS', title: <>Practical workflows<br /><em>& automation.</em></>,
+    intro: 'Explore carefully scoped ways to reduce repetitive work and organise information with suitable digital tools. Feasibility, data handling, account access, provider limits and ongoing costs are considered before implementation.',
+    capabilities: ['Mapping current repetitive tasks and handoffs', 'Identifying suitable low-risk automation opportunities', 'Workflow prototypes and small digital utilities', 'Agreed AI or third-party tool connections where appropriate', 'Basic documentation and operating guidance'],
+    deliverables: ['A current-state workflow summary', 'A prioritised automation opportunity list', 'An agreed prototype or workflow configuration if feasible', 'Usage notes, dependencies and known limitations'],
+    process: ['Map the task, inputs, outputs and failure cases', 'Review privacy, access, provider and cost constraints', 'Agree a small scope and testable acceptance criteria', 'Test with appropriate sample data and document handover'],
+    enquiry: 'Explain the repetitive work you want to improve.', service: 'Workflow & automation'
+  }
+};
+
+function ServiceDetailPage({ page }: { page: typeof servicePages[string] }) {
+  return <PageLayout eyebrow={page.eyebrow} title={page.title} intro={page.intro}>
+    <div className="service-detail-content">
+      <section aria-labelledby="service-capabilities"><h2 id="service-capabilities">What we can explore</h2><ul>{page.capabilities.map((item) => <li key={item}>{item}</li>)}</ul></section>
+      <section aria-labelledby="service-deliverables"><h2 id="service-deliverables">Potential deliverables</h2><p>Deliverables depend on the agreed brief and feasibility. Examples may include:</p><ul>{page.deliverables.map((item) => <li key={item}>{item}</li>)}</ul></section>
+      <section aria-labelledby="service-process"><h2 id="service-process">How an engagement works</h2><ol>{page.process.map((item) => <li key={item}>{item}</li>)}</ol></section>
+    </div>
+    <div className="page-cta"><h2>Discuss this service</h2><p>{page.enquiry} We’ll review the context before agreeing scope, timing and cost.</p><a className="button button-primary" href={`/contact?service=${encodeURIComponent(page.service)}`}>Make a service enquiry <Arrow /></a><p className="scope-note">No scope, delivery date or outcome is promised until it is agreed.</p></div>
   </PageLayout>;
 }
 
@@ -255,7 +306,7 @@ function App() {
     if (canonical) canonical.href = `https://nexwavedigitalsolutions.co.ke${route === '/' ? '/' : route}`;
   }, [route]);
 
-  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : route === '/store' ? <StorePage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
+  return <><a className="skip-link" href="#main-content">Skip to content</a><div className="site-shell"><div className="utility-bar"><span>Digital solutions, thoughtfully built.</span><LocalClock /></div><Header /><main id="main-content">{route === '/' ? <HomePage /> : route === '/services' ? <ServicesPage /> : servicePages[route] ? <ServiceDetailPage page={servicePages[route]} /> : route === '/about' ? <AboutPage /> : route === '/our-story' ? <StoryPage /> : route === '/contact' ? <ContactPage /> : route === '/privacy' ? <PrivacyPage /> : route === '/store' ? <StorePage /> : <NotFoundPage />}</main><Footer /></div><BackToTop /></>;
 }
 
 export default App;
