@@ -218,7 +218,7 @@ function ServiceDetailPage({ page }: { page: typeof servicePages[string] }) {
       <section aria-labelledby="service-deliverables"><h2 id="service-deliverables">Potential deliverables</h2><p>Deliverables depend on the agreed brief and feasibility. Examples may include:</p><ul>{page.deliverables.map((item) => <li key={item}>{item}</li>)}</ul></section>
       <section aria-labelledby="service-process"><h2 id="service-process">How an engagement works</h2><ol>{page.process.map((item) => <li key={item}>{item}</li>)}</ol></section>
     </div>
-    <div className="page-cta"><h2>Discuss this service</h2><p>{page.enquiry} We’ll review the context before agreeing scope, timing and cost.</p><a className="button button-primary" href={`/contact?service=${encodeURIComponent(page.service)}`}>Make a service enquiry <Arrow /></a><p className="scope-note">No scope, delivery date or outcome is promised until it is agreed.</p></div>
+    <div className="page-cta"><h2>Discuss this service</h2><p>{page.enquiry} We’ll review the context before agreeing scope, timing and cost.</p><a className="button button-primary" href={`/contact?service=${encodeURIComponent(page.service)}&returnTo=${encodeURIComponent(window.location.pathname)}`}>Make a service enquiry <Arrow /></a><p className="scope-note">No scope, delivery date or outcome is promised until it is agreed.</p></div>
   </PageLayout>;
 }
 
@@ -315,8 +315,11 @@ function Breadcrumbs({ route }: { route: string }) {
 function ContextualBackLink({ route }: { route: string }) {
   if (servicePages[route]) return <div className="contextual-back section-wrap"><a href="/services">← Back to Services</a></div>;
   if (route === '/contact') {
-    const requested = new URLSearchParams(window.location.search).get('service');
-    const serviceRoute = Object.entries(servicePages).find(([, page]) => page.service === requested)?.[0];
+    const params = new URLSearchParams(window.location.search);
+    const requestedReturn = params.get('returnTo');
+    const safeReturn = requestedReturn && Object.prototype.hasOwnProperty.call(servicePages, requestedReturn) ? requestedReturn : undefined;
+    const requestedService = params.get('service');
+    const serviceRoute = safeReturn ?? Object.entries(servicePages).find(([, page]) => page.service === requestedService)?.[0];
     if (serviceRoute) {
       const label = servicePages[serviceRoute].eyebrow.replace(/^SERVICE \d+ \/ /, '');
       return <div className="contextual-back section-wrap"><a href={serviceRoute}>← Back to {label.toLowerCase()}</a></div>;
