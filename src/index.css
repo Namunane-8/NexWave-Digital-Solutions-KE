@@ -555,3 +555,14 @@ p { line-height: 1.75; }
   .site-header { position: relative; }
   .primary-nav { top: 100%; }
 }
+
+
+/* Individual service detail page content */
+.service-detail-content { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; max-width: 850px; }
+.service-detail-content section { padding: 0 0 26px; border-bottom: 1px solid var(--line); }
+.service-detail-content h2 { margin: 0 0 14px; font-size: clamp(23px, 3vw, 30px); line-height: 1.25; }
+.service-detail-content ul, .service-detail-content ol { padding-left: 1.35rem; margin: 0; }
+.service-detail-content li { padding: 5px 0 5px 4px; line-height: 1.65; }
+.service-detail-content p { color: var(--muted); }
+.service-detail-content + .page-cta { margin-top: clamp(34px, 6vw, 68px); }
+.page-cta .scope-note { margin-top: 16px; color: var(--muted); }
